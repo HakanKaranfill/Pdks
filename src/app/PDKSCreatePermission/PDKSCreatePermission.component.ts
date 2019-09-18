@@ -13,6 +13,7 @@ import { confirm } from 'devextreme/ui/dialog';
   styleUrls: ['./PDKSCreatePermission.component.css']
 })
 export class PDKSCreatePermissionComponent implements OnInit {
+  
   permisssion: string[];
   permissionForm : permissonFormModel;
   permissionType : permissionTypeModel[];
@@ -28,6 +29,7 @@ export class PDKSCreatePermissionComponent implements OnInit {
   }
 
   ngOnInit() {
+
 this.getPermissions();
   }
   btnClear() { 
