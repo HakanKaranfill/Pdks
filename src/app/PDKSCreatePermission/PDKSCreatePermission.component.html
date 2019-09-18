@@ -1,0 +1,67 @@
+<div id="form-container">
+       
+        <form action="your-action" style="margin-bottom: 5px;">
+                <dx-form id="myForm" [formData]="permissionForm" labelLocation="top">              
+                  <dxi-item dataField="permissionName" editorType="dxTextBox">                    
+                    <dxi-validation-rule type="required" message="İzin/Tatil Alanı Boş Geçilemez."></dxi-validation-rule>
+                    <dxo-label text="Tatil/İzin Adı"></dxo-label>  
+                  </dxi-item>        
+                                       
+                  <dxi-item dataField="type" editorType="dxSelectBox" [editorOptions]="{dataSource: permissionType, valueExpr: 'value',displayExpr:'name' }">
+                    <dxi-validation-rule type="required" message="Tip Alanı Boş Geçilemez"></dxi-validation-rule>
+                    <dxo-label text="Tatil/İzin Tipi"></dxo-label>
+                  </dxi-item> 
+                
+                </dx-form>
+              </form>
+
+              <div id="myForm" style="right:43%;">
+                <dx-button icon="save" text="Kaydet" type="default"  (onClick)='savePermisson()' style="margin: 5px;float: right;">
+                </dx-button>                  
+        </div>
+
+        </div>
+
+      
+        <div style="width: 100%;
+margin-top: 100px;">
+  <div style="text-align:center;">
+    <h2 style="color: #494a49;">İzin Listesi</h2>
+    </div>
+ <dx-data-grid 
+ (onRowUpdated)="Update($event)"
+ (onRowRemoved)="Delete($event)"
+    id="gridContainer"
+    [dataSource]="permisssionsList"
+    [showBorders]="true"
+    [allowColumnReordering]="true"
+    keyExpr="kimlik"
+    [rowAlternationEnabled]="true" [showBorders]="true" [focusedRowEnabled]="true" [columnHidingEnabled]="true">    
+    <dxo-selection mode="single"></dxo-selection>
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
+    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[20, 40, 60, 80, 100]"></dxo-pager>
+    <!-- <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel> -->
+    <dxo-group-panel [visible]="false"></dxo-group-panel>
+    <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+    <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="false"></dxo-editing>
+    <dxo-filter-row [visible]="true" ></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-search-panel [visible]="true"  placeholder="Arama..."></dxo-search-panel>
+    <dxo-export [enabled]="true" fileName="İzin Listesi" [allowExportSelectedData]="true"></dxo-export>
+    <dxi-column  caption="Tatil/izin Adı"  dataField="ADI"></dxi-column>
+    <dxi-column dataField="UCRET"  caption="UCRET">
+      <dxo-lookup [dataSource]="permissionType" displayExpr="name" valueExpr="value"></dxo-lookup>
+    </dxi-column>
+    <dxi-column type="buttons" >
+      <dxi-button name="edit" icon="edit"></dxi-button>
+      <dxi-button name="delete" [onClick]="onClickDelete" icon="remove"></dxi-button>
+  </dxi-column>
+    <!-- <dxi-column dataField="State"></dxi-column>
+    <dxi-column dataField="Phone"></dxi-column>
+    <dxi-column dataField="Fax"></dxi-column> -->
+</dx-data-grid>
+</div>
+ <router-outlet></router-outlet>
+

@@ -1,0 +1,117 @@
+<dx-popup 
+          title="Plan Oluştur"
+          [(visible)]="isPopupCreatingGroupPlan"
+          width= "fit-content"
+          height="fit-content"
+          [showCloseButton]="true">
+          <dx-scroll-view direction="both"> 
+            <div id="content">
+                <app-PDKSCreatingGroupPlan></app-PDKSCreatingGroupPlan>
+            </div>
+            </dx-scroll-view>
+    </dx-popup> 
+ <dx-button snhtylingMode="contained" type="normal" text="Plan Oluştur" (onClick)="isPopupCreatingGroupPlan = true"></dx-button>
+
+<dx-data-grid 
+    id="gridContainer"
+    keyExpr="ID"
+    [allowColumnReordering]="true"
+    [showBorders]="true"
+  >
+    
+    <dxo-paging [enabled]="true"></dxo-paging>
+    <dxo-editing 
+         mode="row"
+         [allowUpdating]="true"
+         [allowDeleting]="true"
+         [allowAdding]="true">
+    </dxo-editing>
+    
+    <!-- <dxi-column dataField="Prefix" caption="Title"></dxi-column> -->
+    <!-- <dxi-column dataField="FirstName"></dxi-column> -->
+    <!-- <dxi-column dataField="LastName"></dxi-column> -->
+    <dxi-column dataField="Grup Adı" [width]="260"></dxi-column>
+
+    <!-- <dxi-column
+        dataField="StateID"
+        caption="State"
+        [width]="125">         
+        <dxo-lookup
+            [dataSource]="states"
+            displayExpr="Name"
+            valueExpr="ID">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column
+        dataField="BirthDate"
+        [width]="125"
+        dataType="date">
+    </dxi-column>-->
+</dx-data-grid>
+
+<!-- <div id="events">
+    <div>
+        <div class="caption">
+            Fired events
+        </div>
+        <dx-button id="clear" text="Clear" (onClick)="clearEvents()"></dx-button>
+    </div>
+    <ul>
+        <li *ngFor="let event of events">{{event}}</li>
+    </ul>
+</div>  -->
+
+
+
+
+<dx-data-grid 
+    id="gridContainer"
+    keyExpr="ID"
+    [allowColumnReordering]="true"
+    [showBorders]="true"
+  >
+    
+    <dxo-paging [enabled]="true"></dxo-paging>
+    <dxo-editing 
+         mode="row"
+         [allowUpdating]="true"
+         [allowDeleting]="true"
+         [allowAdding]="true">
+    </dxo-editing>
+    
+    <!-- <dxi-column dataField="Prefix" caption="Title"></dxi-column> -->
+    <!-- <dxi-column dataField="FirstName"></dxi-column> -->
+    <!-- <dxi-column dataField="LastName"></dxi-column> -->
+    <dxi-column dataField="Tarih" [width]="130"></dxi-column>
+    <dxi-column dataField="Vardiya/Tatil" [width]="130"></dxi-column>
+    <!-- <dxi-column
+        dataField="StateID"
+        caption="State"
+        [width]="125">         
+        <dxo-lookup
+            [dataSource]="states"
+            displayExpr="Name"
+            valueExpr="ID">
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column
+        dataField="BirthDate"
+        [width]="125"
+        dataType="date">
+    </dxi-column>  -->
+</dx-data-grid>
+<!-- 
+<div id="events">
+    <div>
+        <div class="caption">
+            Fired events
+        </div>
+        <dx-button id="clear" text="Clear" (onClick)="clearEvents()"></dx-button>
+    </div>
+    <ul>
+        <li *ngFor="let event of events">{{event}}</li>
+    </ul>
+</div> -->
+
+
+<router-outlet></router-outlet>

@@ -1,0 +1,83 @@
+<div class="form">
+  
+  <div class="dx-fieldset">
+      <div class="dx-field">
+          <div class="dx-field-label" >Adı Soyadı</div>
+          <div class="dx-field-value" >
+            <dx-text-box [readOnly]="true" [hoverStateEnabled]="false" value="Personel Adı"></dx-text-box>
+          </div>
+      </div> 
+          <div class="dx-field">
+          <div class="dx-field-label" >Ünvan</div>
+          <div class="dx-field-value" >
+              <dx-text-box value=""></dx-text-box>
+          </div>
+          </div>
+          <div class="dx-field">
+          <div class="dx-field-label" >Şube</div>
+          <div class="dx-field-value" >
+              <dx-text-box  [readOnly]="true" [hoverStateEnabled]="false" value="Şube Bilgisi"></dx-text-box>
+          </div>
+          </div>
+          <div class="dx-field">
+          <div class="dx-field-label" >Çalışma Tipi</div>
+          <div class="dx-field-value" > 
+              <dx-lookup
+                [items]="" 
+                [value]=""
+                [showPopupTitle]="false"
+            >
+              </dx-lookup>
+          </div>
+          </div>
+          <div class="dx-field">
+            <div class="dx-field-label" >İşe Giriş</div>
+            <div class="dx-field-value" >
+                <dx-date-box
+                    [value]=""
+                    type="date"
+                    [displayFormat]="'dd/MM/yyyy'"
+                    focus="setFirstDay($event)"
+                    >
+                </dx-date-box>
+            </div>
+          </div>
+          <div class="dx-field">
+            <div class="dx-field-label" >İşten Ayrılış</div>
+            <div class="dx-field-value" >
+                <dx-date-box
+                    [value]=""
+                    type="date"
+                    [displayFormat]="'dd/MM/yyyy'">
+                </dx-date-box>
+            </div>
+          </div>
+        <div class="dx-field">
+          <div class="dx-field-label" >Aktif / Pasif</div>
+          <div class="dx-field-value" >
+              <dx-check-box
+                  [width]="100"
+                  text="Aktif / Pasif"
+              ></dx-check-box>
+        </div>
+
+
+        <div class="dx-field">     
+          <dx-button style="float: right;" snhtylingMode="contained" type="normal" text="Kaydet"  (onClick)="isPopupCreatingStaff"></dx-button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <body></body>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="/__/firebase/6.5.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#reserved-urls -->
+
+<!-- Initialize Firebase -->
+<script src="/__/firebase/init.js"></script>
+     <router-outlet></router-outlet>
+
+  

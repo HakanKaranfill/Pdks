@@ -1,0 +1,19 @@
+<div class="login-page">
+  <div style="text-align: center;
+  margin-top: 1%;"><img width="375px;" src="https://svgshare.com/i/Eod.svg"></div>
+  <div class="form" >
+    <form class="register-form">
+      <input type="text" placeholder="name"/>
+      <input type="password" placeholder="password"/>
+      <input type="text" placeholder="email address"/>
+      <button>create</button>
+      <p class="message">Zaten Kayıtlı? <a href="#">Oturum Aç</a></p>
+    </form>
+    <form class="login-form">
+      <input type="text" placeholder="Kullanıcı Adı"/>
+      <input type="password" placeholder="Şifre"/>
+      <button (click)="onListSubmit($event)">Giriş Yap</button>
+      <p class="message">Kullanıcı Bulunamadı <a href="#">Şifremi Unuttum</a></p>
+    </form>
+  </div>
+</div>
