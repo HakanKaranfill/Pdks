@@ -13,7 +13,7 @@
             </div>
             </dx-scroll-view>
     </dx-popup> 
- <dx-button snhtylingMode="contained" id="button"   type="default" text="Personel Bilgilerini Düzelt"  (onClick)="isPopupCreatingStaff = true"></dx-button>
+ <!-- <dx-button snhtylingMode="contained" id="button"   type="default" text="Personel Bilgilerini Düzelt"  (onClick)="isPopupCreatingStaff = true"></dx-button> -->
  <!-- <dx-button icon="save" text="Kaydet" type="default"  (onClick)='savePermisson()' style="margin: 5px;float: right;"> -->
  <dx-popup 
     title="İzin Tanımlaması"
@@ -114,7 +114,7 @@ margin-top: 100px;">
     [allowColumnReordering]="true"
     [columnAutoWidth]="true"
     keyExpr="Kimlik"
-    [rowAlternationEnabled]="true" [showBorders]="true" [focusedRowEnabled]="true" [columnHidingEnabled]="true">    
+    [rowAlternationEnabled]="true" [showBorders]="true" [focusedRowEnabled]="true" [columnHidingEnabled]="true" (onRowUpdated)="UpdateStaff($event)">    
     <dxo-selection mode="multiple"></dxo-selection>
     <dxo-group-panel [visible]="true"></dxo-group-panel>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
@@ -123,16 +123,21 @@ margin-top: 100px;">
     <!-- <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel> -->
     <dxo-group-panel [visible]="false"></dxo-group-panel>
     <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
-    <dxo-editing mode="row" [allowUpdating]="false" [allowAdding]="false"></dxo-editing>
+    <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="false"></dxo-editing>
     <dxo-filter-row [visible]="true" ></dxo-filter-row>
     <dxo-header-filter [visible]="true"></dxo-header-filter>
     <dxo-search-panel [visible]="true" [width]="240" placeholder="Arama..."></dxo-search-panel>
     <dxo-export [enabled]="true" fileName="Personel Listesi" [allowExportSelectedData]="true"></dxo-export>
-    <dxi-column  caption="Personel Adı"  dataField="PERSONEL_ADI"></dxi-column>
-    <dxi-column caption="Şube Kodu" dataField="SUBE_KODU"></dxi-column>
- <dxi-column caption="İşe Giriş" dataField="ISE_GIRIS"></dxi-column>
- <dxi-column caption="İşten Ayrılış" dataField="ISTEN_AYRILIS"></dxi-column>
- <dxi-column caption="Durum" dataField="AKTIF"></dxi-column>
+    <dxi-column  caption="Personel Adı" [allowEditing]= "false"   dataField="PERSONEL_ADI"></dxi-column>
+    <dxi-column caption="Şube Kodu" [allowEditing]= "false" dataField="SUBE_KODU"></dxi-column>
+    <dxi-column caption="Ünvan" dataField="UNVAN"></dxi-column>
+    <dxi-column caption="Grup Adı" dataField="GRUP_ADI"></dxi-column>
+    <dxi-column caption="İşe Giriş" dataField="ISE_GIRIS" dataType="date"></dxi-column>
+    <dxi-column caption="İşten Ayrılış" dataField="ISTEN_AYRILIS" dataType="date"></dxi-column>
+    <dxi-column caption="Durum" dataField="AKTIF"></dxi-column>
+    <dxi-column type="buttons" >
+        <dxi-button name="edit" icon="edit"></dxi-button>
+    </dxi-column>
     <!-- <dxi-column dataField="State"></dxi-column>
     <dxi-column dataField="Phone"></dxi-column>
     <dxi-column dataField="Fax"></dxi-column> -->

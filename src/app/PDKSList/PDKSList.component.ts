@@ -47,4 +47,13 @@ console.log(this.staffList)
 // that.grid.datasource=result;
     })
 }
+
+//Personel Bilgilerini Günceller
+UpdateStaff(e){
+  debugger
+  console.log(e)
+  this.apistaffService.updateStaff(e.data).subscribe(result => {
+this.getStaffList()
+  })
+}
 }
