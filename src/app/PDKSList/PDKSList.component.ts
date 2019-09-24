@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DxPopupModule, DxDataGridComponent } from "devextreme-angular";
 import { Router } from '@angular/router';
-import { StaffService } from 'src/app/services/Staff.service'
-
+import { StaffService } from 'src/app/services/staffServices/Staff.service'
 import { staffDTO } from 'src/app/model/staffModel'
 import { ResourceLoader } from '@angular/compiler';
 

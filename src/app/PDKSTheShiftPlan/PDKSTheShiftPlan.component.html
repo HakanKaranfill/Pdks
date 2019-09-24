@@ -8,18 +8,18 @@
                 <dxo-label text="Vardiya Adı"></dxo-label>  
             </dxi-item>        
              
-            <dxi-item dataField="startTime" editorType="dxDateBox"  [editorOptions]="{  pickerType: 'rollers', type: 'time', width: '100%', dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }">
+            <dxi-item dataField="startTime" editorType="dxDateBox"  [editorOptions]="{  pickerType: 'rollers', type: 'time', width: '100%', displayFormat : 'HH:mm' , dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }">
                 <dxi-validation-rule type="required" message="Mesai Başlangıç Saati Boş Geçilemez."></dxi-validation-rule>
                 <dxo-label text="Mesai Başlangıç Saati"></dxo-label> 
             </dxi-item>
 
-            <dxi-item dataField="stopTime" editorType="dxDateBox"  [editorOptions]="{  pickerType: 'rollers', type: 'time', width: '100%', dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }">
+            <dxi-item dataField="stopTime" editorType="dxDateBox"  [editorOptions]="{  pickerType: 'rollers', type: 'time', width: '100%', displayFormat : 'HH:mm' , dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }">
                     <dxi-validation-rule type="required" message="Mesai Bitiş Saati Boş Geçilemez."></dxi-validation-rule>
                     <dxo-label text="Mesai Bitiş Saati"></dxo-label> 
             </dxi-item>
   
             <div class="dx-field">
-              <dx-button style="float: right;" snhtylingMode="contained" type="normal" text="Kaydet" (onClick)="isPopupCreatingShift"></dx-button>
+              <dx-button style="float: right;" snhtylingMode="contained" type="normal" text="Kaydet" (onClick)="isPopupCreatingShift()"></dx-button>
             </div>
             
         </dx-form>
@@ -62,15 +62,12 @@
         <dxo-search-panel [visible]="true"  placeholder="Arama..."></dxo-search-panel>
         <dxo-export [enabled]="true" fileName="Vardiya Listesi" [allowExportSelectedData]="true"></dxo-export>
         <dxi-column caption="Vardiya Adı"  dataField="ADI"></dxi-column>
-        <dxi-column caption="Başangıç Saati" dataField="A_ZAMAN"></dxi-column>
-        <dxi-column caption="Bitiş Saati" dataField="K_ZAMAN"></dxi-column>
+        <dxi-column caption="Başangıç Saati" dataField="A_ZAMAN" dataType="datetime" format = "HH:mm" editorType="dxDateBox"  [editorOptions]="{  pickerType: 'rollers', type: 'time', width: '100%', displayFormat : 'HH:mm' , dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }"></dxi-column>
+        <dxi-column caption="Bitiş Saati"    dataField="K_ZAMAN" dataType="datetime" format = "HH:mm" editorType="dxDateBox"  [editorOptions]="{  pickerType: 'rollers', type: 'time', width: '100%', displayFormat : 'HH:mm' , dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }"></dxi-column>
         <dxi-column type="buttons" >
         <dxi-button name="edit" icon="edit"></dxi-button>
-        <dxi-button name="delete" [onClick]="onClickDelete" icon="remove"></dxi-button>
+        <dxi-button name="delete" icon="remove"></dxi-button>
         </dxi-column>
-<!-- <dxi-column dataField="State"></dxi-column>
-<dxi-column dataField="Phone"></dxi-column>
-<dxi-column dataField="Fax"></dxi-column> -->
     </dx-data-grid>
 </div>
 <router-outlet></router-outlet>

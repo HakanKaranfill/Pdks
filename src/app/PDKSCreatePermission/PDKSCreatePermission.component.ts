@@ -52,6 +52,7 @@ this.perService.getPermissions().subscribe(result=>{
       this.getPermissions()
           })
   }
+
   Update(e){
     debugger
     console.log(e)

@@ -10,7 +10,7 @@ import { PDKSListComponent } from './PDKSList/PDKSList.component';
 import { PDKSFormComponent } from './PDKSForm/PDKSForm.component';
 import { DevExtremeModules } from './DevExtreme.module'
 import { PDKSCreatePermissionComponent } from './PDKSCreatePermission/PDKSCreatePermission.component';
-import { PDKSTheShiftPlanComponent } from './PDKSTheShiftPlan/PDKSTheShiftPlan.component';
+import { PDKSCreateShiftComponent } from './PDKSTheShiftPlan/PDKSTheShiftPlan.component';
 import { PDKSGroupWorkPlanComponent } from './PDKSGroupWorkPlan/PDKSGroupWorkPlan.component';
 import { PDKSCreatingGroupPlanComponent } from './PDKSCreatingGroupPlan/PDKSCreatingGroupPlan.component';
 import { PDKSCreatingUserPlanComponent } from './PDKSCreatingUserPlan/PDKSCreatingUserPlan.component';
@@ -47,7 +47,7 @@ const appRoutes: Routes = [
       PDKSListComponent,
       PDKSFormComponent,
       PDKSCreatePermissionComponent,
-      PDKSTheShiftPlanComponent,
+      PDKSCreateShiftComponent,
       PDKSGroupWorkPlanComponent,
       PDKSCreatingGroupPlanComponent,
       PDKSCreatingUserPlanComponent,
