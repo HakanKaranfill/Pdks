@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { PDKSGroupWorkPlanComponent } from './PDKSGroupWorkPlan.component';
+import { PDKSCreateGroupComponent } from './PDKSGroupWorkPlan.component';
 
 describe('PDKSGroupWorkPlanComponent', () => {
-  let component: PDKSGroupWorkPlanComponent;
-  let fixture: ComponentFixture<PDKSGroupWorkPlanComponent>;
+  let component: PDKSCreateGroupComponent;
+  let fixture: ComponentFixture<PDKSCreateGroupComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PDKSGroupWorkPlanComponent ]
+      declarations: [ PDKSCreateGroupComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PDKSGroupWorkPlanComponent);
+    fixture = TestBed.createComponent(PDKSCreateGroupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

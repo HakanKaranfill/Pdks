@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Form from "devextreme/ui/form";
 import {shiftFormModel} from '../model/shiftFormModel';
-import {shiftServiceService} from '../services/shiftService/shiftService.service'
+import {shiftServiceService} from '../services/shiftServices/shiftService.service'
 import notify from 'devextreme/ui/notify';
 import { confirm } from 'devextreme/ui/dialog';
 

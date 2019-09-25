@@ -11,7 +11,7 @@ import { PDKSFormComponent } from './PDKSForm/PDKSForm.component';
 import { DevExtremeModules } from './DevExtreme.module'
 import { PDKSCreatePermissionComponent } from './PDKSCreatePermission/PDKSCreatePermission.component';
 import { PDKSCreateShiftComponent } from './PDKSTheShiftPlan/PDKSTheShiftPlan.component';
-import { PDKSGroupWorkPlanComponent } from './PDKSGroupWorkPlan/PDKSGroupWorkPlan.component';
+import { PDKSCreateGroupComponent } from './PDKSGroupWorkPlan/PDKSGroupWorkPlan.component';
 import { PDKSCreatingGroupPlanComponent } from './PDKSCreatingGroupPlan/PDKSCreatingGroupPlan.component';
 import { PDKSCreatingUserPlanComponent } from './PDKSCreatingUserPlan/PDKSCreatingUserPlan.component';
 import { HttpClientModule, HttpInterceptor,HttpHandler } from '@angular/common/http';
@@ -48,7 +48,7 @@ const appRoutes: Routes = [
       PDKSFormComponent,
       PDKSCreatePermissionComponent,
       PDKSCreateShiftComponent,
-      PDKSGroupWorkPlanComponent,
+      PDKSCreateGroupComponent,
       PDKSCreatingGroupPlanComponent,
       PDKSCreatingUserPlanComponent,
    ],

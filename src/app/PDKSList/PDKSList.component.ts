@@ -20,7 +20,7 @@ export class PDKSListComponent implements OnInit {
   isPopupGroupPlan = false;
   isPopupCreatingGroupPlan = false;
   isPopupUserPlan = false;
-  isPopupGroupWorkPlan = false;
+  isPopupGroupWorkPlan = false;  
   staffList : staffDTO[];
 
 
