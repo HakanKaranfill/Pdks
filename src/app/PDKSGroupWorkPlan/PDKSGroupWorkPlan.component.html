@@ -104,7 +104,9 @@
         <dxo-search-panel [visible]="true"  placeholder="Arama..."></dxo-search-panel>
         
         <dxo-export [enabled]="true" fileName="Grup Çalışma Planı" [allowExportSelectedData]="true"></dxo-export>
-        <dxi-column caption="Tarih"  dataField="TARIH" type = "date"></dxi-column>
+              <dx-text-box  [readOnly]="true" [hoverStateEnabled]="false" value="Şube Bilgisi"></dx-text-box>
+        <dxi-column  caption="Tarih"  dataField="TARIH" dataType="date" [format]="{ type: 'dd.MM.yyyy' }" [editorOptions]="{  readOnly : 'true' }"></dxi-column>
+        <dxi-column  caption="Gün"  dataField="GUN_ADI" ></dxi-column>
         <dxi-column caption="Plan"  dataField="PLAN_TIPI" ></dxi-column>
         <dxi-column type="buttons" >
         <dxi-button name="edit" icon="edit"></dxi-button>
@@ -112,6 +114,7 @@
         </dxi-column>
     </dx-data-grid>
 </div>
+
 
 
 <router-outlet></router-outlet>

@@ -96,14 +96,3 @@ this.getPermissions()
 
   }
 }
-
-//  var result = confirm("Silme işlemini onaylıyor musunuz?", "Silme İşlemi");
-//     result.then(function (dialogResult) {
-//       debugger
-//       if (dialogResult == true) {
-
-//       }
-//       else {
-//         console.log("Hayır dedi");
-//       }
-//     });

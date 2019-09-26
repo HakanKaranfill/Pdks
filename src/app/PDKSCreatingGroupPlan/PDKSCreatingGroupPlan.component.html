@@ -1,3 +1,60 @@
+
+ <div id="form-container">
+       
+  <form action="your-action" style="margin-bottom: 5px;">
+      <dx-form id="myForm" [formData]="workPlanForm" labelLocation="top">              
+          
+        <dxi-item dataField="monday" editorType="dxSelectBox" [editorOptions]="{dataSource: shiftAndPermissionType, valueExpr: 'kimlik',displayExpr:'ADI'}" >                    
+          <dxo-label text="Pazartesi"></dxo-label>  
+        </dxi-item>   
+              
+        <dxi-item dataField="tuesday" editorType="dxSelectBox" [editorOptions]="{dataSource: shiftAndPermissionType, valueExpr: 'kimlik',displayExpr:'ADI'}" >                    
+          <dxo-label text="Salı"></dxo-label>  
+        </dxi-item>  
+
+        <dxi-item dataField="wednesday" editorType="dxSelectBox" [editorOptions]="{dataSource: shiftAndPermissionType, valueExpr: 'kimlik',displayExpr:'ADI'}" >                    
+          <dxo-label text="Çarşamba"></dxo-label>  
+        </dxi-item>  
+
+        <dxi-item dataField="thursday" editorType="dxSelectBox" [editorOptions]="{dataSource: shiftAndPermissionType, valueExpr: 'kimlik',displayExpr:'ADI'}" >                    
+          <dxo-label text="Perşembe"></dxo-label>  
+        </dxi-item>  
+
+        <dxi-item dataField="friday" editorType="dxSelectBox" [editorOptions]="{dataSource: shiftAndPermissionType, valueExpr: 'kimlik',displayExpr:'ADI'}" >                    
+          <dxo-label text="Cuma"></dxo-label>  
+        </dxi-item>  
+
+        <dxi-item dataField="saturday" editorType="dxSelectBox" [editorOptions]="{dataSource: shiftAndPermissionType, valueExpr: 'kimlik',displayExpr:'ADI'}" >                    
+          <dxo-label text="Cumartesi"></dxo-label>  
+        </dxi-item>  
+
+        <dxi-item dataField="sunday" editorType="dxSelectBox" [editorOptions]="{dataSource: shiftAndPermissionType, valueExpr: 'kimlik',displayExpr:'ADI'}" >                    
+          <dxo-label text="Pazar"></dxo-label>  
+        </dxi-item>  
+
+        <dxi-item dataField="startDate" editorType="dxDateBox"  [editorOptions]="{type: 'date', width: '100%', displayFormat : 'dd.MM.yyyy' , dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }">
+            <dxi-validation-rule type="required" message="Başlangıç Tarihi Boş Geçilemez."></dxi-validation-rule>               
+          <dxo-label text="Başlangıç Tarihi"></dxo-label>  
+        </dxi-item> 
+
+        <dxi-item dataField="endDate" editorType="dxDateBox"  [editorOptions]="{type: 'date', width: '100%', displayFormat : 'dd.MM.yyyy' , dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }">     
+            <dxi-validation-rule type="required" message="Bitiş Tarihi Boş Geçilemez."></dxi-validation-rule>               
+          <dxo-label text="Bitiş Tarihi"></dxo-label>  
+        </dxi-item> 
+          
+      </dx-form>
+  </form>
+
+      <div id="myForm" style="right:43%;">
+         <dx-button icon="save" text="Kaydet" type="default"  (onClick)='saveWorkPlanForGroup()' style="margin: 5px;float: right;">
+         </dx-button>                  
+      </div>
+
+</div>
+
+
+<!-- 
+
 <div class="form" style="width: fit-content;">
   <div class="dx-fieldset">
       <div class="dx-field">
@@ -80,5 +137,5 @@
         </div>
       
     </div>
-  </div>
+  </div> -->
 <router-outlet></router-outlet>
