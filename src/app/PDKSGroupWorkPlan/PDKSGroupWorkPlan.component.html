@@ -6,18 +6,15 @@
           [showCloseButton]="true">
           <dx-scroll-view direction="both"> 
             <div id="content">
-                <app-PDKSCreatingGroupPlan></app-PDKSCreatingGroupPlan>
+                <app-PDKSCreatingGroupPlan [(selectedData)]="selectedData" [myCallback]="theBoundCallback"> </app-PDKSCreatingGroupPlan>
+                <!-- <app-ProductForm [myCallback]="theBoundCallback" [(selectedData)]="selectedData"[(productList)]="productList"></app-ProductForm> -->
             </div>
             </dx-scroll-view>
     </dx-popup> 
- <!-- <dx-button snhtylingMode="contained" type="normal" text="Plan Oluştur" (onClick)="isPopupCreatingGroupPlan = true"></dx-button> -->
-
-
-
 
  <div id="form-container">
        
-    <form action="your-action" style="margin-bottom: 5px;">
+    <form action="your-action" style="margin-bottom: 5px">
         <dx-form id="myForm" [formData]="groupForm" labelLocation="top">              
             
             <dxi-item dataField="groupName" editorType="dxTextBox">                    
@@ -28,19 +25,18 @@
         </dx-form>
     </form>
 
-        <div id="myForm" style="right:43%;">
-           <dx-button icon="save" text="Kaydet" type="default"  (onClick)='saveGroup()' style="margin: 5px;float: right;">
+        <div id="myForm" style="right:50%;">
+           <dx-button icon="save" text="Kaydet" type="default"  (onClick)='saveGroup()' style="margin: 5px;float: right; ">
            </dx-button>                  
         </div>
 
 </div>
 
   
-<div style="width: 100%; margin-top: 100px;">
+<div style="margin-left: auto; margin-right: auto;">
     
-    <div style="text-align:center;">
+    <div style="text-align:center;margin: 50px">
         <h2 style="color: #494a49;"> Grup Listesi </h2>
-        
     </div>
     <dx-data-grid 
         (onToolbarPreparing)="onToolbarPreparing($event)"

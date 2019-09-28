@@ -4,8 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { workPlanForGroupModels } from 'src/app/model/workPlanForGroupModel';
 
 let groupModel : groupFormModel = {
-  Kimlik:'',
-  GRUP_ADI: ''
+  groupName: ''
   }
 
 
@@ -49,6 +48,7 @@ saveGroup(groupModel){
     getGroups()
     {
       return this.http.get<groupFormModel[]>('http://localhost:5001/api/group');
+     
     }
 
    

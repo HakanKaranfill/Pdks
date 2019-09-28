@@ -2,29 +2,32 @@ import { Component, OnInit } from '@angular/core';
 import Form from "devextreme/ui/form";
 import {groupFormModel} from '../model/groupModel';
 import {groupServiceService} from '../services/groupServices/groupService.service'
-import {workPlanForGroupModels} from '../model/workPlanForGroupModel';
+import {workPlanForGroupModels,  workPlanTypeModel} from '../model/workPlanForGroupModel';
 import { workPlanForGroupService} from '../services/groupWorkPlan/groupWorkPlan.service'
-
+import Swal from 'sweetalert2'
 import notify from 'devextreme/ui/notify';
 import { confirm } from 'devextreme/ui/dialog';
+import { Direct } from 'protractor/built/driverProviders';
 
 
 
+var selectedValue : number = 0;
 @Component({
   selector: 'app-PDKSGroupWorkPlan',
   templateUrl: './PDKSGroupWorkPlan.component.html',
   styleUrls: ['./PDKSGroupWorkPlan.component.css']
 })
 export class PDKSCreateGroupComponent implements OnInit {
+  public theBoundCallback: Function;
   
-  group: string[];
   groupForm : groupFormModel;
   groupList : groupFormModel[];
+  selectedData : workPlanTypeModel;
 
   workPlanForGroup: string[];
   workPlanForGroupForm : workPlanForGroupModels;
   groupWorkList : workPlanForGroupModels[];
-
+  selectedValues = selectedValue
   
   isPopupCreatingStaff = false;
   isPopupCreatingGroupPlan = false ;
@@ -37,8 +40,9 @@ export class PDKSCreateGroupComponent implements OnInit {
   
 
   ngOnInit() {
+    this.theBoundCallback = this.theCallback.bind(this);
+    this.getGroup();
 
-this.getGroup();
   }
   btnClear() { 
     let element = document.getElementById("myForm");
@@ -52,12 +56,23 @@ this.groupService.getGroups().subscribe(result=>{
   
 })
   }
+
+  getWorkGroupPlan(){
+    debugger
+    console.log(selectedValue)
+    this.workPlanForGroupService.getworkPlanForGroup(selectedValue).subscribe(result=>{
+      this.groupWorkList=result;
+    })
+      }
+
+  public theCallback(){
+    this.getWorkGroupPlan();
+    this.isPopupCreatingGroupPlan = false
+  }
  
 
   //İzin Silme
   Delete(e){
-    debugger
-    console.log('delete')
     this.groupService.deleteGroup(e.data).subscribe(result => {
       this.getGroup()
           })
@@ -85,15 +100,28 @@ this.groupService.getGroups().subscribe(result=>{
 
   
   groupForWorkPlan(e){
-    this.isPopupCreatingGroupPlan = true
-           }
+    if (selectedValue > 0)
+    {
+        this.isPopupCreatingGroupPlan = true
+        
+    }
+    else
+    {
+      Swal.fire({
+        type: 'error',
+        title: 'Hata...',
+        text: 'Grup Seçimi Yapmadınız!'
+        })
+    }
+                  }
+                    
   
   selectionChanged(e){
         debugger
-        console.log(e.selectedRowsData[0].kimlik)
+        this.selectedData = e.selectedRowsData[0].kimlik;
+        selectedValue = e.selectedRowsData[0].kimlik
         this.workPlanForGroupService.getworkPlanForGroup(e.selectedRowsData[0].kimlik).subscribe(result=>{
           this.groupWorkList=result;
-          // this.getWorkGroup()
         })
         }
     
@@ -107,7 +135,10 @@ this.groupService.getGroups().subscribe(result=>{
         }
 
 saveGroup(){   
+  debugger
   console.log(this.groupForm)
+  console.log(this.groupForm.groupName)
+  // console.log(this.groupName)  
   let element = document.getElementById("myForm");
   let instance = Form.getInstance(element) as Form; 
   let result = instance.validate()
