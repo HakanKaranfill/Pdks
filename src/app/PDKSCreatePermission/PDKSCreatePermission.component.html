@@ -50,7 +50,7 @@ margin-top: 100px;">
     <dxo-search-panel [visible]="true"  placeholder="Arama..."></dxo-search-panel>
     <dxo-export [enabled]="true" fileName="İzin Listesi" [allowExportSelectedData]="true"></dxo-export>
     <dxi-column  caption="Tatil/izin Adı"  dataField="ADI"></dxi-column>
-    <dxi-column dataField="UCRET"  caption="UCRET">
+    <dxi-column dataField="UCRET"  caption="İzin Tipi">
       <dxo-lookup [dataSource]="permissionType" displayExpr="name" valueExpr="value"></dxo-lookup>
     </dxi-column>
     <dxi-column type="buttons" >

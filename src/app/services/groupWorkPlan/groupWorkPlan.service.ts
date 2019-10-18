@@ -10,7 +10,7 @@ let workPlanForGroupModel : workPlanForGroupModels = {
   VARDIYA_IZIN_ID: ''
   }
 
-  let workPlanForGroupModelFrom : workPlanForGroupModelsFrom = {
+  let  workPlanForGroupModelFrom : workPlanForGroupModelsFrom = {
     groupID : '',
     monday : '',
     tuesday : '',
@@ -47,20 +47,20 @@ return workPlanForGroupModelFrom;
 
 }
 
-// deleteworkPlanForGroup(workPlanForGroupModel)
-// {
-//   debugger
-//   let httpHeaders = new HttpHeaders().set('Content-Type', 'application/json')
-//   let parameters = JSON.stringify({
-//     workPlanForGroupModel : workPlanForGroupModel,
-//     licanceNo:2402
-//   });
-//   let options = { headers: httpHeaders,
-//   body:parameters }; 
-//   return this.http.delete('http://localhost:5001/api/workPlanForGroup',options)
-// }
-saveworkPlanForGroup(workPlanForGroupModelsFrm,selectData){
+deleteworkPlanForGroup(workPlanForGroupModel)
+{
   debugger
+  let httpHeaders = new HttpHeaders().set('Content-Type', 'application/json')
+  let parameters = JSON.stringify({
+    workPlanForGroupModel : workPlanForGroupModel,
+    licanceNo:2402
+  });
+  let options = { headers: httpHeaders,
+  body:parameters }; 
+  return this.http.delete('http://localhost:5001/api/workPlanForGroup',options)
+}
+
+saveworkPlanForGroup(workPlanForGroupModelsFrm,selectData){
     let httpHeaders = new HttpHeaders().set('Content-Type', 'application/json')
     let parameters = JSON.stringify({
       workPlanForGroupModelsFrm : workPlanForGroupModelsFrm,
@@ -68,7 +68,6 @@ saveworkPlanForGroup(workPlanForGroupModelsFrm,selectData){
       licanceNo:2402
     });
     let options = { headers: httpHeaders}; 
-    console.log(parameters)
     return this.http.put('http://localhost:5001/api/workPlanForGroup',parameters,options)
     }
 
@@ -76,7 +75,9 @@ saveworkPlanForGroup(workPlanForGroupModelsFrm,selectData){
     getworkPlanForGroup(kimlik:number)
 
     {
-      debugger
+      
       return this.http.get<workPlanForGroupModels[]>('http://localhost:5001/api/workPlanForGroup/'+kimlik+'');
+      debugger
+      console.log(workPlanForGroupModels)
     }
 }

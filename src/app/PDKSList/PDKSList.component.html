@@ -55,17 +55,17 @@
  <dx-button stylingMode="contained" id="button" type="default" text="Grup Çalışma Planı" (onClick)="isPopupGroupWorkPlan = true"></dx-button>
 
  <dx-popup 
- title="Çalışma Planı"
+ title="Personel Çalışma Planı"
  [(visible)]="isPopupUserPlan"
  fullScreen= "true"
  [showCloseButton]="true">
  <dx-scroll-view direction="both"> 
    <div id="content">
-       <app-PDKSCreatingUserPlan></app-PDKSCreatingUserPlan>
+       <app-PDKSCreatingUserPlan  [(selectedData)]="selectedData" ></app-PDKSCreatingUserPlan>
    </div>
    </dx-scroll-view>
 </dx-popup> 
- <dx-button stylingMode="contained" id="button" type="default" text="İşlemler" (onClick)="isPopupUserPlan = true" color = "red"></dx-button>
+ <dx-button stylingMode="contained" id="button" type="default" text="Personel Çalışma Planı" (onClick)="personelForWorkPlan($event)" color = "red"></dx-button>
 
  <dx-popup 
     title="Aylık Çizelge"
@@ -74,11 +74,11 @@
     [showCloseButton]="true">
     <dx-scroll-view direction="both"> 
       <div id="content">
-          <app-PDKSForm></app-PDKSForm>
+          <app-PDKSMontlySchedule [(isPopupMonthlySchedule)]="isPopupMonthlySchedule"></app-PDKSMontlySchedule>
       </div>
       </dx-scroll-view>
 </dx-popup>  
- <dx-button stylingMode="contained" id="button" type="default" text="Aylık Çizelge" (onClick)="isPopupMonthlySchedule = true" ></dx-button>
+ <dx-button stylingMode="contained" id="button" type="default" text="Aylık Çizelge" (onClick)="PopupMonthlySchedule($event)" ></dx-button>
 
 
 
@@ -87,24 +87,7 @@
  </div>
  
 
- <!-- <dx-data-grid id="gridContainer"  [dataSource]="staffList" keyExpr="Kimlik" [allowColumnReordering]="true"
- [rowAlternationEnabled]="true" [showBorders]="true" [focusedRowEnabled]="true" [columnHidingEnabled]="true">    
- <dxo-selection mode="multiple"></dxo-selection>
- <dxo-group-panel [visible]="true"></dxo-group-panel>
- <dxo-load-panel [enabled]="true"></dxo-load-panel>
- <dxo-paging [pageSize]="10"></dxo-paging>
- <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[20, 40, 60, 80, 100]"></dxo-pager>
- <dxo-group-panel [visible]="false"></dxo-group-panel>
- <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
- <dxo-editing mode="row" [allowUpdating]="false" [allowAdding]="false"></dxo-editing>
- <dxo-filter-row [visible]="true" ></dxo-filter-row>
- <dxo-header-filter [visible]="true"></dxo-header-filter>
- <dxi-column caption="Şube Kodu" datafield="SUBE_KODU"></dxi-column>
- <dxi-column caption="Personel Kodu" datafield="PERSONEL_KODU"> </dxi-column>
- <dxi-column caption="Personel İsmi" datafield="PERSONEL_ADI"></dxi-column>
 
-
- </dx-data-grid> -->
 <div style="width: 100%;
 margin-top: 100px;">
  <dx-data-grid 
@@ -114,13 +97,19 @@ margin-top: 100px;">
     [allowColumnReordering]="true"
     [columnAutoWidth]="true"
     keyExpr="Kimlik"
-    [rowAlternationEnabled]="true" [showBorders]="true" [focusedRowEnabled]="true" [columnHidingEnabled]="true" (onRowUpdated)="UpdateStaff($event)">    
-    <dxo-selection mode="multiple"></dxo-selection>
+    [rowAlternationEnabled]="true" 
+    [showBorders]="true" 
+    [focusedRowEnabled]="true" 
+    [columnHidingEnabled]="true" 
+    (onRowUpdated)="UpdateStaff($event)"
+    (onSelectionChanged)="selectionChanged($event)"
+    [selectedRowKeys]="[]">    
+
+    <dxo-selection mode="single"></dxo-selection>
     <dxo-group-panel [visible]="true"></dxo-group-panel>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
     <dxo-paging [pageSize]="10"></dxo-paging>
     <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[20, 40, 60, 80, 100]"></dxo-pager>
-    <!-- <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel> -->
     <dxo-group-panel [visible]="false"></dxo-group-panel>
     <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
     <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="false"></dxo-editing>
@@ -131,9 +120,13 @@ margin-top: 100px;">
     <dxi-column  caption="Personel Adı" [allowEditing]= "false"   dataField="PERSONEL_ADI"></dxi-column>
     <dxi-column caption="Şube Kodu" [allowEditing]= "false" dataField="SUBE_KODU"></dxi-column>
     <dxi-column caption="Ünvan" dataField="UNVAN"></dxi-column>
-    <dxi-column caption="Grup Adı" dataField="GRUP_ADI"></dxi-column>
-    <dxi-column caption="İşe Giriş" dataField="ISE_GIRIS" dataType="date" ></dxi-column>
-    <dxi-column caption="İşten Ayrılış" dataField="ISTEN_AYRILIS" dataType="date"></dxi-column>
+    <dxi-column caption="Grup Adı" dataField="GRUP_ID">
+        <dxo-lookup [dataSource]="getGroupEdit"  valueExpr="kimlik" displayExpr="GRUP_ADI"></dxo-lookup>
+    </dxi-column>
+
+
+    <dxi-column caption="İşe Giriş" dataField="ISE_GIRIS" dataType="date" editorType="dxDateBox" [format]="{ type: 'dd.MM.yyyy' }" [editorOptions]="{ type: 'date', width: '100%', displayFormat : 'dd.MM.yyyy' , dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }"></dxi-column>
+    <dxi-column caption="İşten Ayrılış" dataField="ISTEN_AYRILIS" dataType="date" [format]="{ type: 'dd.MM.yyyy' }" [editorOptions]="{type: 'date', width: '100%', displayFormat : 'dd.MM.yyyy' , dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }"></dxi-column>
     <dxi-column caption="Durum" dataField="AKTIF"></dxi-column>
     <dxi-column type="buttons" >
         <dxi-button name="edit" icon="edit"></dxi-button>
@@ -143,6 +136,5 @@ margin-top: 100px;">
     <dxi-column dataField="Fax"></dxi-column> -->
 </dx-data-grid>
 </div>
-
 
 <router-outlet></router-outlet>

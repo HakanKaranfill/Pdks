@@ -1,11 +1,11 @@
 export class staffDTO {
-    Kimlik = Number;
-    SUBE_KODU = String;
-    PERSONEL_KODU = String;
-    PERSONEL_ADI = String;
-    AKTIF = String;
-    ISE_GIRIS = Date;
-    ISTEN_AYRILIS = Date;
-    UNVAN = String;
-    GRUP_ID = Number;
+    Kimlik;
+    SUBE_KODU;
+    PERSONEL_KODU;
+    PERSONEL_ADI;
+    AKTIF;
+    ISE_GIRIS;
+    ISTEN_AYRILIS;
+    UNVAN;
+    GRUP_ID
     }

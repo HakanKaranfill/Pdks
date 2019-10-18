@@ -14,8 +14,12 @@ import { PDKSCreateShiftComponent } from './PDKSTheShiftPlan/PDKSTheShiftPlan.co
 import { PDKSCreateGroupComponent } from './PDKSGroupWorkPlan/PDKSGroupWorkPlan.component';
 import { PDKSCreatingGroupPlanComponent } from './PDKSCreatingGroupPlan/PDKSCreatingGroupPlan.component';
 import { PDKSCreatingUserPlanComponent } from './PDKSCreatingUserPlan/PDKSCreatingUserPlan.component';
-import { HttpClientModule, HttpInterceptor,HttpHandler } from '@angular/common/http';
-
+import { HttpClientModule, HttpInterceptor,HttpHandler,HttpClient } from '@angular/common/http';
+import { PDKSCreatingUserPlanActionComponent } from './PDKSCreatingUserPlanAction/PDKSCreatingUserPlanAction.component';
+import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { PDKSMontlyScheduleComponent } from './PDKSMontlySchedule/PDKSMontlySchedule.component';
 const appRoutes: Routes = [
    { path: 'Login', component: LoginComponent },
    { path: '', redirectTo: 'Login', pathMatch: 'full' },
@@ -28,7 +32,7 @@ const appRoutes: Routes = [
          //   children:
          //     [
          //       { path: 'PDKSForm', component: PDKSFormComponent },
-         //       { path: 'PDKSCreatePermission', component: PDKSCreatePermissionComponent },
+         //       { path: 'PDKSMontlySchedule', component: PDKSMontlyScheduleComponent },
          //     ]
              
          }
@@ -51,15 +55,24 @@ const appRoutes: Routes = [
       PDKSCreateGroupComponent,
       PDKSCreatingGroupPlanComponent,
       PDKSCreatingUserPlanComponent,
+      PDKSCreatingUserPlanActionComponent,
+      PDKSMontlyScheduleComponent
    ],
    imports: [
+      FormsModule,
+      ReactiveFormsModule,
       BrowserModule,
       AppRoutingModule,
       DevExtremeModules,
       HttpClientModule,
-    
-      RouterModule.forRoot(appRoutes, {useHash:true
-})
+      RouterModule.forRoot(appRoutes, { useHash: true }),
+      TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        })
    ],
    schemas: [
       CUSTOM_ELEMENTS_SCHEMA
@@ -73,3 +86,8 @@ const appRoutes: Routes = [
 })
  
  export class AppModule { }
+
+ export function HttpLoaderFactory(http: HttpClient) {
+   return new TranslateHttpLoader(http);
+ }
+ 

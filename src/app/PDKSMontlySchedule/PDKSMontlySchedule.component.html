@@ -1,0 +1,88 @@
+<div id="form-container">
+
+ 
+  <div id="divTable"> 
+    <dx-load-panel
+    #loadPanel
+    shadingColor="rgba(0,0,0,0.4)"    
+    [(visible)]="loadingVisible"
+    [showIndicator]="true"
+    [showPane]="true"
+    [shading]="true"
+    message = "{{loadPanelMessage}}"
+    [closeOnOutsideClick]="false"
+    (onShown)="onShown()"
+    (onHidden)="onHidden()">
+  </dx-load-panel>
+
+  <form action="your-action" style="margin-bottom: 5px;">
+      <dx-form id="myForm1" [formData]="montlyParam" labelLocation="top">              
+          
+        <!-- <dxo-label text="{{PERSONEL_ADI}} TUNAAA"></dxo-label>  -->
+             
+                        
+        <dxi-item dataField="startDate" editorType="dxDateBox"  [editorOptions]="{type: 'date', width: '100%', displayFormat : 'dd.MM.yyyy' , dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }">
+            <dxi-validation-rule type="required" message="Başlangıç Tarihi Boş Geçilemez."></dxi-validation-rule>               
+          <dxo-label text="Başlangıç Tarihi"></dxo-label>  
+        </dxi-item> 
+
+        <dxi-item dataField="endDate" editorType="dxDateBox"  [editorOptions]="{type: 'date', width: '100%', displayFormat : 'dd.MM.yyyy' , dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }">     
+            <dxi-validation-rule type="required" message="Bitiş Tarihi Boş Geçilemez."></dxi-validation-rule>               
+          <dxo-label text="Bitiş Tarihi"></dxo-label>  
+        </dxi-item> 
+          
+      </dx-form>
+  </form>
+
+      <div id="myForm1" style="right:43%;">
+         <dx-button icon="find" text="Göster" type="default"  (onClick)='show()' style="margin: 5px;float: right;">
+         </dx-button>                  
+      </div>
+
+</div>
+
+
+<div style="width: 100%; margin-top: 100px;">
+  <dx-data-grid 
+      id="gridContainer"
+      [dataSource]="montlyList"
+      [showBorders]="true"
+      [allowColumnReordering]="true"
+      keyExpr="PERHAR_ID"
+      [rowAlternationEnabled]="true" [showBorders]="true" [focusedRowEnabled]="true" [columnHidingEnabled]="true"
+      (onRowUpdated)="onRowUpdated($event)">    
+      <dxo-selection mode="single"></dxo-selection>
+      <dxo-group-panel [visible]="true"></dxo-group-panel>
+      <dxo-load-panel [enabled]="true"></dxo-load-panel>
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[20, 40, 60, 80, 100]"></dxo-pager>
+      <dxo-group-panel [visible]="false"></dxo-group-panel>
+      <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+      <dxo-editing mode="cell" [allowUpdating]="true" [allowDeleting]="false" [allowAdding]="false"></dxo-editing>
+      <dxo-filter-row [visible]="true" ></dxo-filter-row>
+      <dxo-header-filter [visible]="true"></dxo-header-filter>
+      <dxo-search-panel [visible]="true"  placeholder="Arama..."></dxo-search-panel>
+      <dxo-group-panel [visible]="true"></dxo-group-panel>
+      <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+      <dxo-export [enabled]="true"  fileName="Aylık Çizelge" [allowExportSelectedData]="true"></dxo-export>
+      <dxi-column caption="Şube Adı"  [allowEditing]="false"  dataField="SUBE" ></dxi-column>
+      <dxi-column caption="Perosnel Adı"  [allowEditing]="false" dataField="PERSONEL_ADI" ></dxi-column>
+      <dxi-column caption="Tarih"  [allowEditing]="false" dataField="TARIH" [width]="100"></dxi-column>
+      <dxi-column caption="Shift / İzin" [allowEditing]="false"  dataField="VARDIYA_IZIN" ></dxi-column>
+      <dxi-column caption="Başlangıç"  [allowEditing]="false" dataField="VARDIYA_A_ZAMAN" [width]="60"></dxi-column>
+      <dxi-column caption="Bitiş"  [allowEditing]="false" dataField="VARDIYA_K_ZAMAN" [width]="60"></dxi-column>
+      <dxi-column caption="Vardiya Süresi" [allowEditing]="false"  dataField="VARDIYA_TOPLAM" [width]="60"></dxi-column>
+      <dxi-column caption="Giriş Zamanı" [allowEditing]="false" dataField="GIRIS_ZAMANI" [width]="140"></dxi-column>
+      <dxi-column caption="Çıkış Zamanı" [allowEditing]="false"  dataField="CIKIS_ZAMANI" [width]="140"></dxi-column>
+      <dxi-column caption="Toplam Mesai" [allowEditing]="false" dataField="TOPLAM_CALISMA" [width]="60"></dxi-column>
+      <dxi-column caption="+/- Mesai" [allowEditing]="false" dataField="MESAI" [width]="100"></dxi-column>
+      <dxi-column caption="Onay" [allowEditing]="true" dataField="ONAY" [width]="80"></dxi-column>
+      <dxi-column caption="Açıklama" [allowEditing]="true" dataField="ACIKLAMA"></dxi-column>
+      
+      <!-- <dxi-column caption="Mesai"  dataField="MESAI"></dxi-column>
+      <dxi-column caption="Onay"  dataField="ONAY"></dxi-column> -->
+      <!-- <dxi-column caption="Başangıç Saati" dataField="A_ZAMAN" dataType="datetime" format = "HH:mm" editorType="dxDateBox"  [editorOptions]="{  pickerType: 'rollers', type: 'time', width: '100%', displayFormat : 'HH:mm' , dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }"></dxi-column>
+      <dxi-column caption="Bitiş Saati"    dataField="K_ZAMAN" dataType="datetime" format = "HH:mm" editorType="dxDateBox"  [editorOptions]="{  pickerType: 'rollers', type: 'time', width: '100%', displayFormat : 'HH:mm' , dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }"></dxi-column> -->
+  </dx-data-grid>
+</div>
+<router-outlet></router-outlet>

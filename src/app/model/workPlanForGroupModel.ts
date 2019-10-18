@@ -23,3 +23,8 @@ export class workPlanTypeModel {
     kimlik;
     ADI;
 }
+
+// export class workPlanTypeModelNew {
+//     kimlik;
+//     PLAN_TIPI;
+// }

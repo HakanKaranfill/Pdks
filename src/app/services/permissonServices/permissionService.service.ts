@@ -57,6 +57,9 @@ savePermission(permissonModel){
       licanceNo:2402
     });
     let options = { headers: httpHeaders}; 
+    debugger
+    console.log(parameters,options)
+    
     return this.http.put('http://localhost:5001/api/permission',parameters,options)
     }
 

@@ -2,7 +2,7 @@
  <div id="form-container">
        
   <form action="your-action" style="margin-bottom: 5px;">
-      <dx-form id="myForm1" [formData]="saveCreatingGroupPlanForm" labelLocation="top">              
+      <dx-form id="myForm1" [formData]="saveCreatingUserPlanForm" labelLocation="top">              
           
         <dxi-item dataField="monday" editorType="dxSelectBox" [editorOptions]="{dataSource: shiftAndPermissionType, valueExpr: 'kimlik',displayExpr:'ADI'}" >                    
           <dxo-label text="Pazartesi"></dxo-label>  
@@ -46,7 +46,7 @@
   </form>
 
       <div id="myForm1" style="right:43%;">
-         <dx-button icon="save" text="Kaydet" type="default"  (onClick)='saveCreatingGroupPlan()' style="margin: 5px;float: right;">
+         <dx-button icon="save" text="Kaydet" type="default"  (onClick)='saveCreatingUserPlan()' style="margin: 5px;float: right;">
          </dx-button>                  
       </div>
 

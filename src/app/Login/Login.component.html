@@ -1,19 +1,12 @@
-<div class="login-page">
-  <div style="text-align: center;
-  margin-top: 1%;"><img width="375px;" src="https://svgshare.com/i/Eod.svg"></div>
-  <div class="form" >
-    <form class="register-form">
-      <input type="text" placeholder="name"/>
-      <input type="password" placeholder="password"/>
-      <input type="text" placeholder="email address"/>
-      <button>create</button>
-      <p class="message">Zaten Kayıtlı? <a href="#">Oturum Aç</a></p>
-    </form>
-    <form class="login-form">
-      <input type="text" placeholder="Kullanıcı Adı"/>
-      <input type="password" placeholder="Şifre"/>
-      <button (click)="onListSubmit($event)">Giriş Yap</button>
-      <p class="message">Kullanıcı Bulunamadı <a href="#">Şifremi Unuttum</a></p>
-    </form>
-  </div>
+<div class="login-card">
+  <img src="http://test.kerzzcloud.com/Container/images/LOGO.svg" width="250px">
+  <br>
+<form (submit)="onFormSubmit($event)">
+  <input type="text" name="user" placeholder="{{ 'Kullanıcı İsim'}}" [(ngModel)]="user.userName">
+  <input type="password" name="pass" placeholder="{{ 'Kullanıcı Şifre'}}" [(ngModel)]="user.password">
+  <input type="submit" name="login" class="login login-submit" value="{{ 'Giriş'}}">
+</form>
+<div class="login-help">
+  <a href="#">• Şifremi Unuttum • </a>
 </div>
+</div> 

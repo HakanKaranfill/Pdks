@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {workPlanTypeModel,workPlanForGroupModelsFrom} from '../model/workPlanForGroupModel';
-import {workPlanForGroupService} from '../services/groupWorkPlan/groupWorkPlan.service'
+// import {workPlanTypeModel,workPlanForGroupModelsFrom} from '../model/workPlanForGroupModel';
+// import {workPlanForGroupService} from '../services/groupWorkPlan/groupWorkPlan.service'
+import {UserWorkPlanService} from '../services/userWorkPlanServices/userWorkPlan.service'
+import {userPlanTypeModel,workPlanForUserModelsFrom} from '../model/workPlanForUser';
 import {shiftAndPermissionServices} from '../services/shiftAndPermissionServices/shiftAndPermissionServices.service'
 import Form from "devextreme/ui/form";
 // import {permissonFormModel,permissionTypeModel} from '../model/permissionFormModel';
@@ -13,19 +15,19 @@ import { VirtualTimeScheduler } from 'rxjs';
 
 
 @Component({
-  selector: 'app-PDKSCreatingGroupPlan',
-  templateUrl: './PDKSCreatingGroupPlan.component.html',
-  styleUrls: ['./PDKSCreatingGroupPlan.component.css']
+  selector: 'app-PDKSCreatingUserPlanAction',
+  templateUrl: './PDKSCreatingUserPlanAction.component.html',
+  styleUrls: ['./PDKSCreatingUserPlanAction.component.css']
 })
-export class PDKSCreatingGroupPlanComponent implements OnInit {
-  @Input('selectedData') selectedData: workPlanTypeModel; 
-  shiftAndPermissionType : workPlanTypeModel[];
-  saveCreatingGroupPlanForm : workPlanForGroupModelsFrom;
+export class PDKSCreatingUserPlanActionComponent implements OnInit {
+  @Input('selectedData') selectedData: userPlanTypeModel; 
+  shiftAndPermissionType : userPlanTypeModel[];
+  saveCreatingUserPlanForm : workPlanForUserModelsFrom 
 
   public theBoundCallback: Function;
   @Input()  public myCallback: Function; 
-  constructor( public workPlanForGroupService : workPlanForGroupService , public shiftAndPermissionService : shiftAndPermissionServices) {  
-    this.saveCreatingGroupPlanForm = workPlanForGroupService.getWorkPlanForGroupInstance()
+  constructor( public UserWorkPlanService : UserWorkPlanService , public shiftAndPermissionService : shiftAndPermissionServices) {  
+    this.saveCreatingUserPlanForm = UserWorkPlanService.getWorkPlanForUserFormInstance();
     // this.shiftAndPermissionType = shiftAndPermissionService.getWorkPlan();
     // this.btnClear()
    }
@@ -53,14 +55,13 @@ export class PDKSCreatingGroupPlanComponent implements OnInit {
     
       
 
-      saveCreatingGroupPlan(){   
-        console.log(this.saveCreatingGroupPlanForm)
+      saveCreatingUserPlan(){   
         let element = document.getElementById("myForm1");
         let instance = Form.getInstance(element) as Form; 
         let result = instance.validate()
         if (result.isValid) 
         {
-          this.workPlanForGroupService.saveworkPlanForGroup(this.saveCreatingGroupPlanForm,this.selectedData).subscribe(result => {
+          this.UserWorkPlanService.saveworkPlanForUser(this.saveCreatingUserPlanForm,this.selectedData).subscribe(result => {
             console.log(result["message"])
             if (result["message"]=="Ok") {
               notify({
@@ -71,7 +72,7 @@ export class PDKSCreatingGroupPlanComponent implements OnInit {
                 }
             }, "success", 1500); 
             // this.getPermissions();
-            debugger
+            
             this.btnClear(); 
             this.myCallback();
             

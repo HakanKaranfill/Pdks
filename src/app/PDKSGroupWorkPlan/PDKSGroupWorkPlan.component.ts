@@ -3,6 +3,7 @@ import Form from "devextreme/ui/form";
 import {groupFormModel} from '../model/groupModel';
 import {groupServiceService} from '../services/groupServices/groupService.service'
 import {workPlanForGroupModels,  workPlanTypeModel} from '../model/workPlanForGroupModel';
+import {shiftAndPermissionServices} from '../services/shiftAndPermissionServices/shiftAndPermissionServices.service'
 import { workPlanForGroupService} from '../services/groupWorkPlan/groupWorkPlan.service'
 import Swal from 'sweetalert2'
 import notify from 'devextreme/ui/notify';
@@ -19,20 +20,22 @@ var selectedValue : number = 0;
 })
 export class PDKSCreateGroupComponent implements OnInit {
   public theBoundCallback: Function;
-  
+  groupName: string;
   groupForm : groupFormModel;
   groupList : groupFormModel[];
   selectedData : workPlanTypeModel;
-
+  shiftAndPermissionType : workPlanTypeModel[];
+  
   workPlanForGroup: string[];
   workPlanForGroupForm : workPlanForGroupModels;
   groupWorkList : workPlanForGroupModels[];
   selectedValues = selectedValue
   
+  
   isPopupCreatingStaff = false;
   isPopupCreatingGroupPlan = false ;
 
-  constructor(public groupService : groupServiceService, public workPlanForGroupService : workPlanForGroupService) { 
+  constructor(public groupService : groupServiceService, public workPlanForGroupService : workPlanForGroupService, public shiftAndPermissionService : shiftAndPermissionServices ) { 
     this.groupForm = groupService.getGroupFormInstance()
   
   }
@@ -42,6 +45,7 @@ export class PDKSCreateGroupComponent implements OnInit {
   ngOnInit() {
     this.theBoundCallback = this.theCallback.bind(this);
     this.getGroup();
+    this.getShiftAndPermissionType();
 
   }
   btnClear() { 
@@ -57,10 +61,15 @@ this.groupService.getGroups().subscribe(result=>{
 })
   }
 
+  getShiftAndPermissionType(){
+    this.shiftAndPermissionService.getWorkPlan().subscribe(result=>{
+            this.shiftAndPermissionType=result
+           
+                            });
+    }
+
   getWorkGroupPlan(){
-    debugger
-    console.log(selectedValue)
-    this.workPlanForGroupService.getworkPlanForGroup(selectedValue).subscribe(result=>{
+        this.workPlanForGroupService.getworkPlanForGroup(selectedValue).subscribe(result=>{
       this.groupWorkList=result;
     })
       }
@@ -75,6 +84,16 @@ this.groupService.getGroups().subscribe(result=>{
   Delete(e){
     this.groupService.deleteGroup(e.data).subscribe(result => {
       this.getGroup()
+      this.getWorkGroupPlan()
+      this.groupName = ""
+          })
+  }
+
+  DeleteGroupWorkList(e){
+    this.workPlanForGroupService.deleteworkPlanForGroup(e.data).subscribe(result => {
+      this.getGroup()
+      this.getWorkGroupPlan()
+      this.groupName = ""
           })
   }
 
@@ -118,6 +137,7 @@ this.groupService.getGroups().subscribe(result=>{
   
   selectionChanged(e){
         debugger
+        this.groupName=e.selectedRowsData[0].GRUP_ADI;
         this.selectedData = e.selectedRowsData[0].kimlik;
         selectedValue = e.selectedRowsData[0].kimlik
         this.workPlanForGroupService.getworkPlanForGroup(e.selectedRowsData[0].kimlik).subscribe(result=>{
@@ -127,23 +147,28 @@ this.groupService.getGroups().subscribe(result=>{
     
 
   Update(e){
-    debugger
-    console.log(e.data)
     this.groupService.saveGroup(e.data).subscribe(result => {
             this.getGroup()
             })
         }
 
+
+        updateGroupWorkList(e){
+          debugger
+          console.log(e)
+          this.workPlanForGroupService.saveworkPlanForGroup(e.data,"").subscribe(result => {
+            
+          })
+        }
+
 saveGroup(){   
   debugger
-  console.log(this.groupForm)
-  console.log(this.groupForm.groupName)
-  // console.log(this.groupName)  
   let element = document.getElementById("myForm");
   let instance = Form.getInstance(element) as Form; 
   let result = instance.validate()
   if (result.isValid) 
   {
+    console.log("TUNA")
     this.groupService.saveGroup(this.groupForm).subscribe(result => {
       debugger
       if (result["message"]=="Ok") {

@@ -1,3 +1,4 @@
 export class groupFormModel {
-    groupName;
+    kimlik;
+    GRUP_ADI;
 }
