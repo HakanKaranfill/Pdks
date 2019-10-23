@@ -2,7 +2,7 @@
 
 <div style="float: right;">
     
-    <dx-popup 
+    <!-- <dx-popup 
           title="Personel Bilgilerini Düzelt"
           [(visible)]="isPopupCreatingStaff"
           fullScreen= "true"
@@ -12,10 +12,24 @@
                 <app-PDKSForm></app-PDKSForm>
             </div>
             </dx-scroll-view>
-    </dx-popup> 
+    </dx-popup>  -->
  <!-- <dx-button snhtylingMode="contained" id="button"   type="default" text="Personel Bilgilerini Düzelt"  (onClick)="isPopupCreatingStaff = true"></dx-button> -->
  <!-- <dx-button icon="save" text="Kaydet" type="default"  (onClick)='savePermisson()' style="margin: 5px;float: right;"> -->
- <dx-popup 
+<dx-popup 
+    title="Ünvan Tanımlaması"
+    [(visible)]="isPopupCreateTitle"
+    fullScreen= "true"
+    [showCloseButton]="true">
+    <dx-scroll-view direction="both"> 
+      <div id="content">
+          <app-PDKSTitle></app-PDKSTitle>
+      </div>
+      </dx-scroll-view>
+</dx-popup>  
+ <dx-button stylingMode="contained" id="button" type="default" text="Ünvan Tanımlaması"  (onClick)="isPopupCreateTitle = true" ></dx-button>
+ 
+ 
+    <dx-popup 
     title="İzin Tanımlaması"
     [(visible)]="isPopupCreatePermission"
     fullScreen= "true"
@@ -29,7 +43,7 @@
  <dx-button stylingMode="contained" id="button" type="default" text="İzin Tanımlaması"  (onClick)="isPopupCreatePermission = true" ></dx-button>
  
 <dx-popup 
-    title="Vardiya Tanımlaması"
+    title="Shift Tanımlaması"
     [(visible)]="isPopupShiftPlan"
     fullScreen= "true"
     [showCloseButton]="true">
@@ -39,7 +53,7 @@
       </div>
       </dx-scroll-view>
 </dx-popup> 
- <dx-button stylingMode="contained" id="button" type="default" text="Vardiya Tanımlaması"  (onClick)="isPopupShiftPlan = true"></dx-button>
+ <dx-button stylingMode="contained" id="button" type="default" text="Shift Tanımlaması"  (onClick)="isPopupShiftPlan = true"></dx-button>
 
  <dx-popup 
     title="Grup Çalışma Planı"
@@ -119,7 +133,9 @@ margin-top: 100px;">
     <dxo-export [enabled]="true" fileName="Personel Listesi" [allowExportSelectedData]="true"></dxo-export>
     <dxi-column  caption="Personel Adı" [allowEditing]= "false"   dataField="PERSONEL_ADI"></dxi-column>
     <dxi-column caption="Şube Kodu" [allowEditing]= "false" dataField="SUBE_KODU"></dxi-column>
-    <dxi-column caption="Ünvan" dataField="UNVAN"></dxi-column>
+    <dxi-column caption="Ünvan Adı" dataField="UNVAN_ID">
+        <dxo-lookup [dataSource]="getTitleEdit"  valueExpr="kimlik" displayExpr="UNVAN_ADI"></dxo-lookup>
+    </dxi-column>
     <dxi-column caption="Grup Adı" dataField="GRUP_ID">
         <dxo-lookup [dataSource]="getGroupEdit"  valueExpr="kimlik" displayExpr="GRUP_ADI"></dxo-lookup>
     </dxi-column>
@@ -131,9 +147,6 @@ margin-top: 100px;">
     <dxi-column type="buttons" >
         <dxi-button name="edit" icon="edit"></dxi-button>
     </dxi-column>
-    <!-- <dxi-column dataField="State"></dxi-column>
-    <dxi-column dataField="Phone"></dxi-column>
-    <dxi-column dataField="Fax"></dxi-column> -->
 </dx-data-grid>
 </div>
 

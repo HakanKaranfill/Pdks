@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import Form from "devextreme/ui/form";
-import {permissonFormModel,permissionTypeModel} from '../model/permissionFormModel';
+import {permissonFormModel,permissionTypeModel, controlModel} from '../model/permissionFormModel';
 import {PermissionServiceService} from '../services/permissonServices/permissionService.service'
 import notify from 'devextreme/ui/notify';
 import { confirm } from 'devextreme/ui/dialog';
+import Swal from 'sweetalert2';
 
-
+var actionValue : number = 0;
 
 @Component({
   selector: 'app-PDKSCreatePermission',
@@ -18,6 +19,7 @@ export class PDKSCreatePermissionComponent implements OnInit {
   permissionForm : permissonFormModel;
   permissionType : permissionTypeModel[];
   permisssionsList : permissonFormModel[];
+  actionControl : controlModel[];
 
   
   isPopupCreatingStaff = false;
@@ -33,7 +35,7 @@ export class PDKSCreatePermissionComponent implements OnInit {
 this.getPermissions();
   }
   btnClear() { 
-    let element = document.getElementById("myForm");
+    let element = document.getElementById("formPermission");
     let instance = Form.getInstance(element) as Form; 
     instance.resetValues(); //Formu Temizle
   }
@@ -44,25 +46,58 @@ this.perService.getPermissions().subscribe(result=>{
 })
   }
 
+
+
   //İzin Silme
   Delete(e){
-    debugger
-    console.log('delete')
-    this.perService.deletePermission(e.data).subscribe(result => {
-      this.getPermissions()
+    this.perService.getPermissionsControl(e.data.kimlik).subscribe(result=>{
+      this.actionControl = result ;
+      actionValue = this.actionControl[0].permissionControl 
+
+      if(actionValue > 0) 
+      {
+        this.getPermissions()
+        Swal.fire({
+          type: 'error',
+          title: 'Hata...',
+          text: 'Çalışma Planına Eklenen Tatil / İzin Silinemez !'
           })
+          
+      }
+      else{
+          this.perService.deletePermission(e.data).subscribe(result => {
+          
+              })
+      }
+    })
   }
 
   Update(e){
-    debugger
-    console.log(e)
-    this.perService.savePermission(e.data).subscribe(result => {
-this.getPermissions()
+    this.perService.getPermissionsControl(e.data.kimlik).subscribe(result=>{
+      this.actionControl = result ;
+      actionValue = this.actionControl[0].permissionControl 
+
+      if(actionValue > 0) 
+      {
+        this.getPermissions()
+        Swal.fire({
+          type: 'error',
+          title: 'Hata...',
+          text: 'Çalışma Planına Eklenen Tatil / İzin Değiştirilemez !'
+          })
+          
+      }
+      else{
+        this.perService.savePermission(e.data).subscribe(result => {
+          this.getPermissions()
+        })
+      }
     })
   }
+
   savePermisson(){   
   console.log(this.permissionForm)
-  let element = document.getElementById("myForm");
+  let element = document.getElementById("formPermission");
   let instance = Form.getInstance(element) as Form; 
   let result = instance.validate()
   if (result.isValid) 

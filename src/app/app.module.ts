@@ -20,6 +20,7 @@ import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { PDKSMontlyScheduleComponent } from './PDKSMontlySchedule/PDKSMontlySchedule.component';
+import { PDKSTitleComponent } from './PDKSTitle/PDKSTitle.component';
 const appRoutes: Routes = [
    { path: 'Login', component: LoginComponent },
    { path: '', redirectTo: 'Login', pathMatch: 'full' },
@@ -56,7 +57,8 @@ const appRoutes: Routes = [
       PDKSCreatingGroupPlanComponent,
       PDKSCreatingUserPlanComponent,
       PDKSCreatingUserPlanActionComponent,
-      PDKSMontlyScheduleComponent
+      PDKSMontlyScheduleComponent,
+      PDKSTitleComponent
    ],
    imports: [
       FormsModule,

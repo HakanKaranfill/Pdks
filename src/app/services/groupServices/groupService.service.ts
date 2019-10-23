@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {groupFormModel} from '../../model/groupModel';
+import {groupFormModel,controlModel} from '../../model/groupModel';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { workPlanForGroupModels } from 'src/app/model/workPlanForGroupModel';
 import {Observable,of, from } from 'rxjs';
 let groupModel : groupFormModel = {
-  kimlik:'',
-  GRUP_ADI: 0
+  kimlik:0,
+  GRUP_ADI: ''
   }
 
 
@@ -52,6 +52,14 @@ saveGroup(groupModel){
      
     }
 
+  
+    getGroupControl(kimlik:number)
+
+    {
+      
+      return this.http.get<controlModel[]>('http://localhost:5001/api/group/'+kimlik+'');
+     
+    }
 
 
   //   public getGroups(): Observable<groupFormModel[]> {

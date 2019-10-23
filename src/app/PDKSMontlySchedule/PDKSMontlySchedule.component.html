@@ -1,7 +1,7 @@
 <div id="form-container">
 
  
-  <div id="divTable"> 
+  <!-- <div id="divTable"> 
     <dx-load-panel
     #loadPanel
     shadingColor="rgba(0,0,0,0.4)"    
@@ -13,7 +13,7 @@
     [closeOnOutsideClick]="false"
     (onShown)="onShown()"
     (onHidden)="onHidden()">
-  </dx-load-panel>
+  </dx-load-panel> -->
 
   <form action="your-action" style="margin-bottom: 5px;">
       <dx-form id="myForm1" [formData]="montlyParam" labelLocation="top">              
@@ -62,22 +62,23 @@
       <dxo-filter-row [visible]="true" ></dxo-filter-row>
       <dxo-header-filter [visible]="true"></dxo-header-filter>
       <dxo-search-panel [visible]="true"  placeholder="Arama..."></dxo-search-panel>
-      <dxo-group-panel [visible]="true"></dxo-group-panel>
+      <dxo-group-panel [visible]="false"></dxo-group-panel>
       <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
       <dxo-export [enabled]="true"  fileName="Aylık Çizelge" [allowExportSelectedData]="true"></dxo-export>
-      <dxi-column caption="Şube Adı"  [allowEditing]="false"  dataField="SUBE" ></dxi-column>
+      <dxi-column caption="Şube Adı"  [allowEditing]="false"  dataField="SUBE" [width]="150"></dxi-column>
       <dxi-column caption="Perosnel Adı"  [allowEditing]="false" dataField="PERSONEL_ADI" ></dxi-column>
-      <dxi-column caption="Tarih"  [allowEditing]="false" dataField="TARIH" [width]="100"></dxi-column>
-      <dxi-column caption="Shift / İzin" [allowEditing]="false"  dataField="VARDIYA_IZIN" ></dxi-column>
+      <dxi-column caption="Tarih"  [allowEditing]="false" dataField="TARIH" [width]="85"></dxi-column>
+      <dxi-column caption="Shift / İzin" [allowEditing]="false"  dataField="VARDIYA_IZIN" [width]="150"></dxi-column>
       <dxi-column caption="Başlangıç"  [allowEditing]="false" dataField="VARDIYA_A_ZAMAN" [width]="60"></dxi-column>
       <dxi-column caption="Bitiş"  [allowEditing]="false" dataField="VARDIYA_K_ZAMAN" [width]="60"></dxi-column>
       <dxi-column caption="Vardiya Süresi" [allowEditing]="false"  dataField="VARDIYA_TOPLAM" [width]="60"></dxi-column>
       <dxi-column caption="Giriş Zamanı" [allowEditing]="false" dataField="GIRIS_ZAMANI" [width]="140"></dxi-column>
       <dxi-column caption="Çıkış Zamanı" [allowEditing]="false"  dataField="CIKIS_ZAMANI" [width]="140"></dxi-column>
       <dxi-column caption="Toplam Mesai" [allowEditing]="false" dataField="TOPLAM_CALISMA" [width]="60"></dxi-column>
-      <dxi-column caption="+/- Mesai" [allowEditing]="false" dataField="MESAI" [width]="100"></dxi-column>
-      <dxi-column caption="Onay" [allowEditing]="true" dataField="ONAY" [width]="80"></dxi-column>
+      <dxi-column caption="+/- Mesai" [allowEditing]="false" dataField="MESAI" [width]="95"></dxi-column>
+      <dxi-column caption="Onay" [allowEditing]="true" dataField="ONAY" [width]="85"></dxi-column>
       <dxi-column caption="Açıklama" [allowEditing]="true" dataField="ACIKLAMA"></dxi-column>
+      <dxi-column caption="Son İşlem" [allowEditing]="false" dataField="KULLANICI" [width]="120"></dxi-column>
       
       <!-- <dxi-column caption="Mesai"  dataField="MESAI"></dxi-column>
       <dxi-column caption="Onay"  dataField="ONAY"></dxi-column> -->

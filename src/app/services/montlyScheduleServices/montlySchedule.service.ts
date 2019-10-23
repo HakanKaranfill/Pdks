@@ -83,18 +83,15 @@ return montlyParamModel;
     }
 
 
-    approvalSchedule(approval:boolean,perharID:string,explanation:string)
-
-    
+    approvalSchedule(approval:boolean,perharID:string,description:string, loginUser:string)
     {
-      debugger
-
       let httpHeaders = new HttpHeaders().set('Content-Type', 'application/json')
           let parameters = JSON.stringify({
             approval : approval,
             perharID : perharID,
-            explanation : explanation,  
-            licanceNo:2402
+            description : description,  
+            licanceNo : 2402,
+            loginUser : loginUser
           });
           let options = { headers: httpHeaders}; 
           // return this.http.get<montlyScheduleModel[]>('http://localhost:5001/api/group');

@@ -3,6 +3,7 @@ import {montlyScheduleModel, montlyScheduleParam} from '../model/montlyScheduleM
 import {MontlyScheduleService} from '../services/montlyScheduleServices/montlySchedule.service';
 import Form from "devextreme/ui/form";
 import { staffDTO } from 'src/app/model/staffModel'
+import {UserService} from '../services/loginServices/user.service'
 
 @Component({
   selector: 'app-PDKSMontlySchedule',
@@ -13,21 +14,24 @@ export class PDKSMontlyScheduleComponent implements OnInit ,OnChanges {
   montlyList : montlyScheduleModel [];
   montlyParam : montlyScheduleParam;
   loadingVisible = true ;
-  loadPanelMessage = "Veri Yükleniyor";
+  // loadPanelMessage = "Veri Yükleniyor";
+  loginName = ""
   // public theBoundCallback: Function;
   @Input('isPopupMonthlySchedule') isPopupMonthlySchedule: boolean;  
-  constructor(public MontlyScheduleService : MontlyScheduleService) { 
+  constructor(public MontlyScheduleService : MontlyScheduleService, public UserService : UserService) { 
     this.montlyParam = MontlyScheduleService.getMontlyParamFormInstance()
+    this.loginName = UserService.userName +' '+ UserService.userSurname
+    
   }
 
   ngOnInit() {
    
   }
-  onShown() {
-    setTimeout(() => {
-       // this.loadingVisible = false;
-    }, 3000);
-  }
+  // onShown() {
+  //   setTimeout(() => {
+  //      // this.loadingVisible = false;
+  //   }, 3000);
+  // }
 
   ngOnChanges(changes : SimpleChanges){
     debugger
@@ -43,10 +47,10 @@ export class PDKSMontlyScheduleComponent implements OnInit ,OnChanges {
   onHidden() {
   }
 
-  showLoadPanel() {
+  // showLoadPanel() {
 
-    this.loadingVisible = true;
-  }
+  //   this.loadingVisible = true;
+  // }
   btnClear() { 
     let element = document.getElementById("myForm1");
     let instance = Form.getInstance(element) as Form; 
@@ -55,13 +59,10 @@ export class PDKSMontlyScheduleComponent implements OnInit ,OnChanges {
 
   onRowUpdated(e)
   {
-    this.MontlyScheduleService.approvalSchedule(e.data.ONAY,e.data.PERHAR_ID,e.data.ACIKLAMA).subscribe(result=>{
-      // this.show()
-    })
+    this.MontlyScheduleService.approvalSchedule(e.data.ONAY,e.data.PERHAR_ID,e.data.ACIKLAMA, this.loginName).subscribe(result=>{
+    // this.show()
+  })
 
-  //  this.groupService.saveGroup(e.data).subscribe(result => {
-    // this.getGroup()
-    
   }
 
   show()
@@ -72,17 +73,15 @@ export class PDKSMontlyScheduleComponent implements OnInit ,OnChanges {
     let result = instance.validate()
     if (result.isValid) 
     {
-      this.loadPanelMessage  = "Veriler Yükleniyor..."
-      this.showLoadPanel();
+      // this.loadPanelMessage  = "Veriler Yükleniyor..."
+      // this.showLoadPanel();
       this.MontlyScheduleService.getMontlySchedule(this.montlyParam.startDate,this.montlyParam.endDate).subscribe(result=>{
         this.montlyList=result;
+        // this.loadingVisible = false;
       })
+
       // this.btnClear();
       }
-        
-        
-      
-    
   
     }
   

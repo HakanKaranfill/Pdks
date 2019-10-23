@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import {permissonFormModel,permissionTypeModel} from '../../model/permissionFormModel';
+import {permissonFormModel,permissionTypeModel,controlModel} from '../../model/permissionFormModel';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+// let ctrlModel : controlModel = {
+//   control : 0 ,
+//   }
 let permissonModel : permissonFormModel = {
   Kimlik:'',
   permissionName: '',
@@ -66,5 +69,15 @@ savePermission(permissonModel){
     getPermissions()
     {
       return this.http.get<permissonFormModel[]>('http://localhost:5001/api/permission');
+    }
+
+
+    
+    getPermissionsControl(kimlik:number)
+
+    {
+      
+      return this.http.get<controlModel[]>('http://localhost:5001/api/permission/'+kimlik+'');
+     
     }
 }

@@ -8,8 +8,8 @@ import {groupFormModel} from '../model/groupModel'
 import { ResourceLoader } from '@angular/compiler';
 import { groupServiceService } from '../services/groupServices/groupService.service';
 import Swal from 'sweetalert2';
-import { debug } from 'util';
-
+import {TitleServicesService} from '../services/titleServices/titleService.service'
+import {titleModels} from '../model/titleModel'
 var that;
 
 @Component({
@@ -24,20 +24,23 @@ export class PDKSListComponent implements OnInit {
   isPopupCreatePermission = false;
   isPopupShiftPlan = false;
   isPopupGroupPlan = false;
+  isPopupCreateTitle = false ;
   isPopupCreatingGroupPlan = false;
   isPopupUserPlan = false;
   isPopupGroupWorkPlan = false;  
   staffList : any;
   getGroupEdit : groupFormModel[];
+  getTitleEdit : titleModels[];
   selectedData : staffDTO;
   data : boolean = false  ;
   isPopupMonthlySchedule : boolean= false  ;
   selectedID : number = 0
 
 
-   constructor(public _router: Router,private apistaffService:StaffService , public groupService : groupServiceService) { 
+   constructor(public _router: Router,private apistaffService:StaffService , public groupService : groupServiceService, public titleService : TitleServicesService) { 
     this.getStaffList();
     this.getGroupEdits();
+    this.getTitleEdits();
     that=this;
    }
  
@@ -59,6 +62,13 @@ getGroupEdits(){
   })
 }
 
+
+getTitleEdits(){
+  // debugger
+  this.titleService.getTitle().subscribe(result => {
+  this.getTitleEdit=result;
+  })
+}
 
 //Personel Bilgilerini Günceller
 UpdateStaff(e){

@@ -15,7 +15,7 @@
  <div id="form-container">
        
     <form action="your-action" style="margin-bottom: 5px">
-        <dx-form id="myForm" [formData]="groupForm" labelLocation="top">              
+        <dx-form id="formGroup" [formData]="groupForm" labelLocation="top">              
             
             <dxi-item dataField="groupName" editorType="dxTextBox">                    
                 <dxi-validation-rule type="required" message="Grup Adı Boş Geçilemez."></dxi-validation-rule>
@@ -108,8 +108,8 @@
               <!-- <dx-text-box  [readOnly]="true" [hoverStateEnabled]="false" value="Şube Bilgisi"></dx-text-box> -->
         <dxi-column  caption="Tarih"  dataField="TARIH" dataType="date" [format]="{ type: 'dd.MM.yyyy' }" [editorOptions]="{  readOnly : 'true' }"></dxi-column>
         <dxi-column  caption="Gün"  dataField="GUN_ADI" [editorOptions]="{  readOnly : 'true' }"></dxi-column>
-        <dxi-column  dataField="VARDIYA_IZIN_ID"caption="Plan" >
-            <dxo-lookup [dataSource]="shiftAndPermissionType" displayExpr="ADI" valueExpr="kimlik"></dxo-lookup>
+        <dxi-column caption="Plan" dataField="VARDIYA_IZIN_ID">
+            <dxo-lookup [dataSource]="shiftAndPermissionType"  valueExpr="kimlik" displayExpr="ADI"></dxo-lookup>
         </dxi-column>
         <dxi-column type="buttons" >
         <dxi-button name="edit" icon="edit"></dxi-button>

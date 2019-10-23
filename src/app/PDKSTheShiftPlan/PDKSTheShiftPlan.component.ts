@@ -4,7 +4,10 @@ import {shiftFormModel} from '../model/shiftFormModel';
 import {shiftServiceService} from '../services/shiftServices/shiftService.service'
 import notify from 'devextreme/ui/notify';
 import { confirm } from 'devextreme/ui/dialog';
-
+import {controlModel} from '../model/permissionFormModel';
+import {PermissionServiceService} from '../services/permissonServices/permissionService.service'
+import Swal from 'sweetalert2';
+var actionValue : number = 0;
 
 
 @Component({
@@ -17,11 +20,11 @@ export class PDKSCreateShiftComponent implements OnInit {
   shift: string[];
   shiftForm : shiftFormModel;
   shiftList : shiftFormModel[];
-
+  actionControl : controlModel[];
   
   isPopupCreatingStaff = false;
 
-  constructor(public shiftService : shiftServiceService) { 
+  constructor(public shiftService : shiftServiceService, public controlService : PermissionServiceService) { 
     this.shiftForm = shiftService.getShiftFormInstance()
    
   }
@@ -44,24 +47,67 @@ this.shiftService.getShifts().subscribe(result=>{
 
   //İzin Silme
   Delete(e){
-    debugger
-    console.log('delete')
-    this.shiftService.deleteShift(e.data).subscribe(result => {
-      this.getShift()
+    this.controlService.getPermissionsControl(e.data.kimlik).subscribe(result=>{
+      this.actionControl = result ;
+      actionValue = this.actionControl[0].permissionControl 
+
+      if(actionValue > 0) 
+      {
+        this.getShift()
+        Swal.fire({
+          type: 'error',
+          title: 'Hata...',
+          text: 'Çalışma Planına Eklenen Vardiya Silinemez !'
           })
+          
+      }
+      else{
+        this.shiftService.deleteShift(e.data).subscribe(result => {
+          //this.getShift()
+              })
+      }
+    })
+    
+
+
+
+
+   
   }
+
+
+
+
+
   isPopupCreatingShift(){}
   onClickDelete()
   {
     
   }
   Update(e){
-    debugger
-    console.log(e)
-    this.shiftService.saveShift(e.data).subscribe(result => {
-this.getShift()
+    this.controlService.getPermissionsControl(e.data.kimlik).subscribe(result=>{
+      this.actionControl = result ;
+      actionValue = this.actionControl[0].permissionControl 
+
+      if(actionValue > 0) 
+      {
+        this.getShift()
+        Swal.fire({
+          type: 'error',
+          title: 'Hata...',
+          text: 'Çalışma Planına Eklenen Varidya Değiştirilemez !'
+          })
+          
+      }
+      else{
+        this.shiftService.saveShift(e.data).subscribe(result => {
+          // this.getShift()
+              })
+      }
     })
   }
+
+
 saveShift(){   
   console.log(this.shiftForm)
   let element = document.getElementById("myForm");

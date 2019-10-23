@@ -6,6 +6,6 @@ export class staffDTO {
     AKTIF;
     ISE_GIRIS;
     ISTEN_AYRILIS;
-    UNVAN;
+    UNVAN_ID;
     GRUP_ID
     }

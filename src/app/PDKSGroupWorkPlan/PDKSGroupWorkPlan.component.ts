@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Form from "devextreme/ui/form";
-import {groupFormModel} from '../model/groupModel';
+import {groupFormModel,controlModel} from '../model/groupModel';
 import {groupServiceService} from '../services/groupServices/groupService.service'
 import {workPlanForGroupModels,  workPlanTypeModel} from '../model/workPlanForGroupModel';
 import {shiftAndPermissionServices} from '../services/shiftAndPermissionServices/shiftAndPermissionServices.service'
@@ -9,7 +9,8 @@ import Swal from 'sweetalert2'
 import notify from 'devextreme/ui/notify';
 import { confirm } from 'devextreme/ui/dialog';
 import { Direct } from 'protractor/built/driverProviders';
-
+import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
+var actionValue : number = 0;
 
 
 var selectedValue : number = 0;
@@ -30,7 +31,7 @@ export class PDKSCreateGroupComponent implements OnInit {
   workPlanForGroupForm : workPlanForGroupModels;
   groupWorkList : workPlanForGroupModels[];
   selectedValues = selectedValue
-  
+  actionControl : controlModel[];
   
   isPopupCreatingStaff = false;
   isPopupCreatingGroupPlan = false ;
@@ -49,7 +50,7 @@ export class PDKSCreateGroupComponent implements OnInit {
 
   }
   btnClear() { 
-    let element = document.getElementById("myForm");
+    let element = document.getElementById("formGroup");
     let instance = Form.getInstance(element) as Form; 
     instance.resetValues(); //Formu Temizle
   }
@@ -82,11 +83,38 @@ this.groupService.getGroups().subscribe(result=>{
 
   //İzin Silme
   Delete(e){
-    this.groupService.deleteGroup(e.data).subscribe(result => {
-      this.getGroup()
-      this.getWorkGroupPlan()
-      this.groupName = ""
+   
+    this.groupService.getGroupControl(e.data.kimlik).subscribe(result=>{
+      this.actionControl = result ;
+      actionValue = this.actionControl[0].groupControl 
+
+      if(actionValue > 0) 
+      {
+        //this.getGroup()
+        //this.getWorkGroupPlan()
+        Swal.fire({
+          type: 'error',
+          title: 'Hata...',
+          text: 'Kullanıcıya Tanımlanmış Grup Silinemez !'
           })
+          this.getGroup()
+          this.groupWorkList = null
+        }
+      else{
+        this.groupService.deleteGroup(e.data).subscribe(result => {
+          this.getGroup()
+          this.getWorkGroupPlan()
+          this.groupWorkList = null
+              })
+      }
+          this.groupName = ""
+    })
+   
+   
+   
+   
+   
+   
   }
 
   DeleteGroupWorkList(e){
@@ -163,7 +191,7 @@ this.groupService.getGroups().subscribe(result=>{
 
 saveGroup(){   
   debugger
-  let element = document.getElementById("myForm");
+  let element = document.getElementById("formGroup");
   let instance = Form.getInstance(element) as Form; 
   let result = instance.validate()
   if (result.isValid) 

@@ -3,7 +3,7 @@ import {workPlanTypeModel} from '../../model/workPlanForGroupModel';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 let workPlanTypes : workPlanTypeModel = {
-  kimlik:'',
+  kimlik:0,
   ADI:''
   }
   

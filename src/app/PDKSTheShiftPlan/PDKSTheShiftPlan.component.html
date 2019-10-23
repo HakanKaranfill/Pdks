@@ -5,17 +5,17 @@
             
             <dxi-item dataField="shiftName" editorType="dxTextBox">                    
                 <dxi-validation-rule type="required" message="Vardiya Alanı Boş Geçilemez."></dxi-validation-rule>
-                <dxo-label text="Vardiya Adı"></dxo-label>  
+                <dxo-label text="Shift Adı"></dxo-label>  
             </dxi-item>        
              
             <dxi-item dataField="startTime" editorType="dxDateBox"  [editorOptions]="{  pickerType: 'rollers', type: 'time', width: '100%', displayFormat : 'HH:mm' , dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }">
                 <dxi-validation-rule type="required" message="Mesai Başlangıç Saati Boş Geçilemez."></dxi-validation-rule>
-                <dxo-label text="Mesai Başlangıç Saati"></dxo-label> 
+                <dxo-label text="Shift Başlangıç Saati"></dxo-label> 
             </dxi-item>
 
             <dxi-item dataField="stopTime" editorType="dxDateBox"  [editorOptions]="{  pickerType: 'rollers', type: 'time', width: '100%', displayFormat : 'HH:mm' , dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }">
                     <dxi-validation-rule type="required" message="Mesai Bitiş Saati Boş Geçilemez."></dxi-validation-rule>
-                    <dxo-label text="Mesai Bitiş Saati"></dxo-label> 
+                    <dxo-label text="Shift Bitiş Saati"></dxo-label> 
             </dxi-item>
   
             <div class="dx-field">

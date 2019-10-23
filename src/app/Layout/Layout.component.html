@@ -1,19 +1,38 @@
-<!-- <dx-toolbar [items]="items">
-</dx-toolbar>
-<dx-list id="products" [dataSource]="productsStore">
-</dx-list> -->
 
-<dx-toolbar   style="/*position: fixed;*/  left: 0;  top: 0;  right: 0;  display: block;  z-index: 999999; background-color: #d6d6d6!important;height: 50px;line-height: 3;">
-</dx-toolbar>
+  <dx-toolbar [items]="toolbarContent" style="/*position: fixed;*/  left: 0;  top: 0;  right: 0;  display: block;  z-index: 999999; background-color: #d6d6d6!important;height: 50px;line-height: 3;">
 
-<p></p>
-<body></body>
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="/__/firebase/6.5.0/firebase-app.js"></script>
+  </dx-toolbar>
+  <dx-drawer style=" top:51px!important;"  [openedStateMode]="selectedOpenMode"
+                  [position]="selectedPosition"
+                  [revealMode]="selectedRevealMode"
+                  template="template"
+                  [opened]="true"
+                  [closeOnOutsideClick]="true"
+                  [minSize]="12">
+    <div *dxTemplate="let data of 'template'">
+        <dx-tree-view class="panel-list dx-theme-accent-as-background-color"   
+                      selectionMode="single"
+                      id="simple-treeview"
+                      [items]="navigation"
+                      [width]="300"
+                      [searchEnabled]="true"
+                      searchMode="contains"
+                      [searchEditorOptions]="{placeholder: 'Arama'}"
+                      #treeview
+                      (onItemClick)="selectItem($event)">
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#reserved-urls -->
-
-<!-- Initialize Firebase -->
-<script src="/__/firebase/init.js"></script>
-<router-outlet></router-outlet>
+        </dx-tree-view>
+        <dx-context-menu
+        [dataSource]="itemsDemo"
+        [width]="200"
+        target="#simple-treeview"
+        displayExpr="text"
+        (onItemClick)="itemClick($event)">
+      </dx-context-menu>
+    </div>
+    <div id="content" class="dx-theme-background-color">
+        <div style="padding-left: 30px;">
+         <label style="font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Verdana, sans-serif; ">{{fullMenuItem}}</label>
+         </div>
+      <router-outlet></router-outlet></div>
+  </dx-drawer>

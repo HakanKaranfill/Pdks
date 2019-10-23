@@ -20,7 +20,8 @@ import { DxTextBoxModule
     ,DxFormModule
     ,DxCalendarModule
     ,DxDrawerModule
-    ,DxSelectBoxModule} from "devextreme-angular";
+    ,DxSelectBoxModule
+    } from "devextreme-angular";
 
 
 @NgModule({
@@ -63,7 +64,7 @@ import { DxTextBoxModule
         DxFormModule,
         DxCheckBoxModule,
         DxCalendarModule,
-        DxSelectBoxModule,
+        DxSelectBoxModule
         
 
   ]
