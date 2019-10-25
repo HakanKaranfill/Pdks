@@ -1,8 +1,11 @@
 
-  <dx-toolbar [items]="toolbarContent" style="/*position: fixed;*/  left: 0;  top: 0;  right: 0;  display: block;  z-index: 999999; background-color: #d6d6d6!important;height: 50px;line-height: 3;">
-
+  <dx-toolbar [items]="toolbarContent" style="/*position: fixed;*/  left: 0;  top: 0;  right: 0;  display: block;  z-index: 1; background-color: #d6d6d6!important;height: 55px;
+  line-height: 2" >
+ 
   </dx-toolbar>
-  <dx-drawer style=" top:51px!important;"  [openedStateMode]="selectedOpenMode"
+  <h5><label style="font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Verdana, sans-serif; z-index: 1;position: fixed; right: initial; left: initial;top: 39px; right: 49px">
+    {{time}} </label></h5>
+  <dx-drawer style=" top:51px!important;margin-top: -14px;"  [openedStateMode]="selectedOpenMode"
                   [position]="selectedPosition"
                   [revealMode]="selectedRevealMode"
                   template="template"

@@ -20,7 +20,7 @@ export class PDKSCreatePermissionComponent implements OnInit {
   permissionType : permissionTypeModel[];
   permisssionsList : permissonFormModel[];
   actionControl : controlModel[];
-
+  permissionHeader ;
   
   isPopupCreatingStaff = false;
 
@@ -31,7 +31,7 @@ export class PDKSCreatePermissionComponent implements OnInit {
   }
 
   ngOnInit() {
-
+this.permissionHeader = "İzin Listesi"
 this.getPermissions();
   }
   btnClear() { 

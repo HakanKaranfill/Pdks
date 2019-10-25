@@ -12,12 +12,14 @@ import notify from 'devextreme/ui/notify';
 export class PDKSTitleComponent implements OnInit {
   titleFormData : titleModels;
     titleList : titleModels[];
+    titleHeader;
 
   constructor(public titleService : TitleServicesService) { 
     this.titleFormData = titleService.getTitleFormInstance()
   }
 
   ngOnInit() {
+    this.titleHeader = "Ünvan Listesi"
     this.getList()
   }
 

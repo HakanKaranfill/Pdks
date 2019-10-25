@@ -32,7 +32,7 @@ export class PDKSCreateGroupComponent implements OnInit {
   groupWorkList : workPlanForGroupModels[];
   selectedValues = selectedValue
   actionControl : controlModel[];
-  
+  groupListHeader;
   isPopupCreatingStaff = false;
   isPopupCreatingGroupPlan = false ;
 
@@ -44,6 +44,7 @@ export class PDKSCreateGroupComponent implements OnInit {
   
 
   ngOnInit() {
+    this.groupListHeader="Grup Listesi" 
     this.theBoundCallback = this.theCallback.bind(this);
     this.getGroup();
     this.getShiftAndPermissionType();

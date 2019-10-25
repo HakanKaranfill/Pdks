@@ -34,14 +34,23 @@ export class PDKSListComponent implements OnInit {
   selectedData : staffDTO;
   data : boolean = false  ;
   isPopupMonthlySchedule : boolean= false  ;
-  selectedID : number = 0
+  selectedID : number = 0;
+
 
 
    constructor(public _router: Router,private apistaffService:StaffService , public groupService : groupServiceService, public titleService : TitleServicesService) { 
+    this.isPopupCreatePermission = false;
+    this.isPopupShiftPlan = false;
+    this.isPopupGroupPlan = false;
+    this.isPopupCreateTitle = false ;
+    this.isPopupCreatingGroupPlan = false;
+    this.isPopupUserPlan = false;
+    this.isPopupGroupWorkPlan = false;  
     this.getStaffList();
     this.getGroupEdits();
     this.getTitleEdits();
     that=this;
+    
    }
  
   ngOnInit() {

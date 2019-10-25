@@ -1,5 +1,8 @@
+
+
 <div id="form-container">
-       
+
+  
         <form action="your-action" style="margin-bottom: 5px;">
                 <dx-form id="formPermission" [formData]="permissionForm" labelLocation="top">              
                   <dxi-item dataField="permissionName" editorType="dxTextBox">                    
@@ -25,7 +28,7 @@
         <div style="width: 100%;
 margin-top: 100px;">
   <div style="text-align:center;">
-    <h2 style="color: #494a49;">İzin Listesi</h2>
+    <h2 style="color: #494a49;">{{permissionHeader}}</h2>
     </div>
  <dx-data-grid 
  (onRowUpdated)="Update($event)"

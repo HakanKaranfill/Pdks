@@ -33,6 +33,7 @@ export class LayoutComponent implements OnInit {
   elementAttr: any;
   fullMenuItem = "";
   itemsDemo: any[];
+  time =""
 //   private service: LayoutService,
   constructor( private router: Router, public translate: TranslateService, public _userService: UserService, private _router: Router) {
     // this.navigation = service.getNavigationList()
@@ -44,6 +45,10 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit() {
     RouterModule;
+    setInterval(() => {
+      this.time = new Date().toLocaleString()
+   }, 1000);
+   
   }
 
   itemClick(e) {
@@ -89,22 +94,24 @@ export class LayoutComponent implements OnInit {
       {
         location: 'before',
         template: () => {
-          return '<img src="https://www.kerzzpos.com/bundles/atlcommon/kerzzpos/assets/dist/img/kerzz-logo-dark.svg" width="150px">';
+          return '<img src="http://test.kerzzcloud.com/Container/images/PDKSLOGO2.svg" width="190px">';
         }
       },
 
       {
         location: 'after',
         template: () => {
-          return 'Hoşgeldiniz, ' + this._userService.userName + ' ' + this._userService.userSurname;
+          return 'Hoşgeldiniz, ' + this._userService.userName + ' ' + this._userService.userSurname ;
         }
       },
       {
+        style : 'margin-top: 12px',
         location: 'after',
         widget: 'dxButton',
         locateInMenu: 'auto',
         options: {
           icon: 'fa fa-sign-out',
+          
           onClick: () => {
             this.logout();
           }

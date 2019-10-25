@@ -1,6 +1,78 @@
+<dx-popup 
+title="İzin Tanımlaması"
+[(visible)]="isPopupCreatePermission"
+fullScreen= "true"
+[showCloseButton]="true">
+<dx-scroll-view direction="both"> 
+  <div id="content">
+      <app-PDKSCreatePermission></app-PDKSCreatePermission>
+  </div>
+  </dx-scroll-view>
+</dx-popup>  
+
+<dx-popup 
+    title="Ünvan Tanımlaması"
+    [(visible)]="isPopupCreateTitle"
+    fullScreen= "true"
+    [showCloseButton]="true">
+    <dx-scroll-view direction="both"> 
+      <div id="content">
+          <app-PDKSTitle></app-PDKSTitle>
+      </div>
+      </dx-scroll-view>
+</dx-popup>  
 
 
-<div style="float: right;">
+<dx-popup 
+    title="Shift Tanımlaması"
+    [(visible)]="isPopupShiftPlan"
+    fullScreen= "true"
+    [showCloseButton]="true">
+    <dx-scroll-view direction="both"> 
+      <div id="content">
+          <app-PDKSTheShiftPlan></app-PDKSTheShiftPlan>
+      </div>
+      </dx-scroll-view>
+</dx-popup> 
+
+<dx-popup 
+    title="Grup Çalışma Planı"
+    [(visible)]="isPopupGroupWorkPlan"
+    fullScreen= "true"
+    [showCloseButton]="true">
+    <dx-scroll-view direction="both"> 
+      <div id="content">
+          <app-PDKSGroupWorkPlan></app-PDKSGroupWorkPlan>
+      </div>
+      </dx-scroll-view>
+</dx-popup> 
+
+<dx-popup 
+ title="Personel Çalışma Planı"
+ [(visible)]="isPopupUserPlan"
+ fullScreen= "true"
+ [showCloseButton]="true">
+ <dx-scroll-view direction="both"> 
+   <div id="content">
+       <app-PDKSCreatingUserPlan  [(selectedData)]="selectedData" ></app-PDKSCreatingUserPlan>
+   </div>
+   </dx-scroll-view>
+</dx-popup> 
+
+
+<dx-popup 
+title="Aylık Çizelge"
+[(visible)]="isPopupMonthlySchedule"
+fullScreen= "true"
+[showCloseButton]="true">
+<dx-scroll-view direction="both"> 
+  <div id="content">
+      <app-PDKSMontlySchedule [(isPopupMonthlySchedule)]="isPopupMonthlySchedule"></app-PDKSMontlySchedule>
+  </div>
+  </dx-scroll-view>
+</dx-popup>  
+
+
     
     <!-- <dx-popup 
           title="Personel Bilgilerini Düzelt"
@@ -15,95 +87,18 @@
     </dx-popup>  -->
  <!-- <dx-button snhtylingMode="contained" id="button"   type="default" text="Personel Bilgilerini Düzelt"  (onClick)="isPopupCreatingStaff = true"></dx-button> -->
  <!-- <dx-button icon="save" text="Kaydet" type="default"  (onClick)='savePermisson()' style="margin: 5px;float: right;"> -->
-<dx-popup 
-    title="Ünvan Tanımlaması"
-    [(visible)]="isPopupCreateTitle"
-    fullScreen= "true"
-    [showCloseButton]="true">
-    <dx-scroll-view direction="both"> 
-      <div id="content">
-          <app-PDKSTitle></app-PDKSTitle>
-      </div>
-      </dx-scroll-view>
-</dx-popup>  
+ <div style="float: right;">
  <dx-button stylingMode="contained" id="button" type="default" text="Ünvan Tanımlaması"  (onClick)="isPopupCreateTitle = true" ></dx-button>
- 
- 
-    <dx-popup 
-    title="İzin Tanımlaması"
-    [(visible)]="isPopupCreatePermission"
-    fullScreen= "true"
-    [showCloseButton]="true">
-    <dx-scroll-view direction="both"> 
-      <div id="content">
-          <app-PDKSCreatePermission></app-PDKSCreatePermission>
-      </div>
-      </dx-scroll-view>
-</dx-popup>  
  <dx-button stylingMode="contained" id="button" type="default" text="İzin Tanımlaması"  (onClick)="isPopupCreatePermission = true" ></dx-button>
- 
-<dx-popup 
-    title="Shift Tanımlaması"
-    [(visible)]="isPopupShiftPlan"
-    fullScreen= "true"
-    [showCloseButton]="true">
-    <dx-scroll-view direction="both"> 
-      <div id="content">
-          <app-PDKSTheShiftPlan></app-PDKSTheShiftPlan>
-      </div>
-      </dx-scroll-view>
-</dx-popup> 
  <dx-button stylingMode="contained" id="button" type="default" text="Shift Tanımlaması"  (onClick)="isPopupShiftPlan = true"></dx-button>
-
- <dx-popup 
-    title="Grup Çalışma Planı"
-    [(visible)]="isPopupGroupWorkPlan"
-    fullScreen= "true"
-    [showCloseButton]="true">
-    <dx-scroll-view direction="both"> 
-      <div id="content">
-          <app-PDKSGroupWorkPlan></app-PDKSGroupWorkPlan>
-      </div>
-      </dx-scroll-view>
-</dx-popup> 
  <dx-button stylingMode="contained" id="button" type="default" text="Grup Çalışma Planı" (onClick)="isPopupGroupWorkPlan = true"></dx-button>
-
- <dx-popup 
- title="Personel Çalışma Planı"
- [(visible)]="isPopupUserPlan"
- fullScreen= "true"
- [showCloseButton]="true">
- <dx-scroll-view direction="both"> 
-   <div id="content">
-       <app-PDKSCreatingUserPlan  [(selectedData)]="selectedData" ></app-PDKSCreatingUserPlan>
-   </div>
-   </dx-scroll-view>
-</dx-popup> 
  <dx-button stylingMode="contained" id="button" type="default" text="Personel Çalışma Planı" (onClick)="personelForWorkPlan($event)" color = "red"></dx-button>
-
- <dx-popup 
-    title="Aylık Çizelge"
-    [(visible)]="isPopupMonthlySchedule"
-    fullScreen= "true"
-    [showCloseButton]="true">
-    <dx-scroll-view direction="both"> 
-      <div id="content">
-          <app-PDKSMontlySchedule [(isPopupMonthlySchedule)]="isPopupMonthlySchedule"></app-PDKSMontlySchedule>
-      </div>
-      </dx-scroll-view>
-</dx-popup>  
  <dx-button stylingMode="contained" id="button" type="default" text="Aylık Çizelge" (onClick)="PopupMonthlySchedule($event)" ></dx-button>
-
-
-
- 
-
  </div>
  
 
-
 <div style="width: 100%;
-margin-top: 100px;">
+margin-top: 50px;">
  <dx-data-grid 
     id="gridContainer"
     [dataSource]="staffList"

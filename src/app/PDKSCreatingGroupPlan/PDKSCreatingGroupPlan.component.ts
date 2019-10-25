@@ -60,6 +60,8 @@ export class PDKSCreatingGroupPlanComponent implements OnInit {
         let result = instance.validate()
         if (result.isValid) 
         {
+          debugger
+          console.log(this)
           this.workPlanForGroupService.saveworkPlanForGroup(this.saveCreatingGroupPlanForm,this.selectedData).subscribe(result => {
             console.log(result["message"])
             if (result["message"]=="Ok") {

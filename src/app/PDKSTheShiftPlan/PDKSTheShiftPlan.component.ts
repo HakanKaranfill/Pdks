@@ -21,7 +21,7 @@ export class PDKSCreateShiftComponent implements OnInit {
   shiftForm : shiftFormModel;
   shiftList : shiftFormModel[];
   actionControl : controlModel[];
-  
+  shiftHeader;
   isPopupCreatingStaff = false;
 
   constructor(public shiftService : shiftServiceService, public controlService : PermissionServiceService) { 
@@ -30,7 +30,7 @@ export class PDKSCreateShiftComponent implements OnInit {
   }
 
   ngOnInit() {
-
+this.shiftHeader = "Vardiya Listesi"
 this.getShift();
   }
   btnClear() { 

@@ -4,6 +4,11 @@
     height: inherit !important;
 }
 
+::ng-deep .dx-drawer-content{
+    margin-top: -17px!important;
+    padding-left: 0px!important;
+
+}
 ::ng-deep .dx-toolbar {
     background-color: #ffffff;
     /* padding: 5px 10px; */
@@ -56,9 +61,29 @@
     display: inline-block;
     margin-right: 50px;
 }
+::ng-deep .dx-button{
+    margin-top: 12px;
+}
+/* ::ng-deep .dx-button-normal {margin-top: 12px;}
+::ng-deep.dx-button-mode-contained {margin-top: 12px;}
+::ng-deep.dx-widget {margin-top: 12px;}
+::ng-deep.dx-button-has-icon{margin-top: 12px;} */
 
+/* ::ng-deep .dx-button-has-icon .dx-icon {
+    color: #333;
+    width: 18px;
+    height: 18px;
+    background-position: 0px 0px;
+    background-size: 18px 18px;
+    padding: 0px;
+    font-size: 18px;
+    text-align: center;
+    line-height: 39px;
+    margin-right: 0;
+    margin-left: 0;
+} */
 ::ng-deep label {
-    font-weight: bold;
+    font-weight: normal;
 }
 
 ::ng-deep #content {
