@@ -68,6 +68,7 @@ export class PDKSMontlyScheduleComponent implements OnInit ,OnChanges {
   show()
   
   {   
+  
     let element = document.getElementById("myForm1");
     let instance = Form.getInstance(element) as Form; 
     let result = instance.validate()
@@ -85,6 +86,37 @@ export class PDKSMontlyScheduleComponent implements OnInit ,OnChanges {
   
     }
   
-  
+    onCellPrepared(e){
+      // debugger
+      // console.log(e.data)
+      // if(e.rowType === 'data') {
+      //     if(e.data.ONAY === true) {
+      //       // e.cellElement.style.color = '#AAAAAA';
+      //       e.cellElement.style.backgroundColor = '#70cf8096';
+      //       e.cellElement.style.color = '#000000';
+      //     }
+      //     else{
+      //       e.cellElement.style.color = '#AAAAAA'
+      //     }
+      //     // if(e.data.SaleAmount > 15000) {
+      //     //   if(e.column.dataField === 'OrderNumber') {
+      //     //     e.cellElement.style.fontWeight = 'bold';
+      //     //   }
+      //     //   if(e.column.dataField === 'SaleAmount') {
+      //     //     e.cellElement.style.backgroundColor = '#FFBB00';
+      //     //     e.cellElement.style.color = '#000000';
+      //     //   }
+      //     // }
+      // }
+      if(e.rowType === 'group') {
+          var nodeColors = [ '#BEDFE6', '#C9ECD7'];
+          e.cellElement.style.backgroundColor = nodeColors[e.row.groupIndex];
+          e.cellElement.style.color = '#000';
+          if(e.cellElement.firstChild && e.cellElement.firstChild.style) e.cellElement.firstChild.style.color = '#000';
+      }
+      if(e.rowType === 'groupFooter') {
+          e.cellElement.style.fontStyle = 'italic';
+      }       
+  }
   
 }

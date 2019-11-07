@@ -94,14 +94,15 @@ export class LayoutComponent implements OnInit {
       {
         location: 'before',
         template: () => {
-          return '<img src="http://test.kerzzcloud.com/Container/images/PDKSLOGO2.svg" width="190px">';
+          return '<img src="http://test.kerzzcloud.com/Container/images/PDKSLOGO.svg" width="190px">';
         }
       },
 
       {
         location: 'after',
         template: () => {
-          return 'Hoşgeldiniz, ' + this._userService.userName + ' ' + this._userService.userSurname ;
+          return 'Hoşgeldiniz, ' + this._userService.userName + ' ' + this._userService.userSurname+ ' ' + this._userService.userLicances[0].licanceId+ ' ' + this._userService.userLicances[0].companyCode ;
+          console.log(this._userService)
         }
       },
       {

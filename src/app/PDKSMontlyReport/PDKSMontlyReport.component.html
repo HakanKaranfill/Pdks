@@ -1,25 +1,33 @@
+<!-- <dx-date-box [disabledDates]="disableDates"></dx-date-box>
+
+<div class="dx-field">
+  <div class="dx-field-label">Date</div>
+  <div class="dx-field-value">
+      <dx-date-box
+         format= "date"
+  width= "200"
+  displayFormat= "monthAndYear"
+  maxZoomLevel= "year"
+  minZoomLevel= "century">
+      </dx-date-box>
+  </div>
+</div> -->
+
+
+
+
+
+
 <div id="form-container">
 
  
-  <!-- <div id="divTable"> 
-    <dx-load-panel
-    #loadPanel
-    shadingColor="rgba(0,0,0,0.4)"    
-    [(visible)]="loadingVisible"
-    [showIndicator]="true"
-    [showPane]="true"
-    [shading]="true"
-    message = "{{loadPanelMessage}}"
-    [closeOnOutsideClick]="false"
-    (onShown)="onShown()"
-    (onHidden)="onHidden()">
-  </dx-load-panel> -->
-
   <form action="your-action" style="margin-bottom: 5px;">
       <dx-form id="myForm1" [formData]="montlyParam" labelLocation="top">              
           
-        <!-- <dxo-label text="{{PERSONEL_ADI}} TUNAAA"></dxo-label>  -->
-             
+          <!-- <dxi-item dataField="startDate" editorType="dxDateBox"  [editorOptions]="{format: 'date',width: '100%',displayFormat: 'monthAndYear',maxZoomLevel: 'year', minZoomLevel: 'century',dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }">
+            <dxi-validation-rule type="required" message="Ay Seçimi Boş Geçilemez."></dxi-validation-rule>               
+          <dxo-label text="Ay Seçimi"></dxo-label>  
+        </dxi-item>  -->   
                         
         <dxi-item dataField="startDate" editorType="dxDateBox"  [editorOptions]="{type: 'date', width: '100%', displayFormat : 'dd.MM.yyyy' , dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }">
             <dxi-validation-rule type="required" message="Başlangıç Tarihi Boş Geçilemez."></dxi-validation-rule>               
@@ -50,7 +58,6 @@
       [allowColumnReordering]="true"
       keyExpr="PERHAR_ID"
       [rowAlternationEnabled]="true" [showBorders]="true" [focusedRowEnabled]="true" [columnHidingEnabled]="true"
-      (onRowUpdated)="onRowUpdated($event)"
       (onCellPrepared)="onCellPrepared($event)">    
       <dxo-selection mode="single"></dxo-selection>
       <dxo-group-panel [visible]="true"></dxo-group-panel>
@@ -66,20 +73,20 @@
       <dxo-group-panel [visible]="false"></dxo-group-panel>
       <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
       <dxo-export [enabled]="true"  fileName="Aylık Çizelge" [allowExportSelectedData]="true"></dxo-export>
-      <dxi-column caption="Şube Adı"  [groupIndex]="0" [allowEditing]="false"  dataField="SUBE" [width]="150"></dxi-column>
+      <dxi-column caption="Şube Adı"  [allowEditing]="false"  dataField="SUBE"  [groupIndex]="0" ></dxi-column>
       <dxi-column caption="Perosnel Adı"  [allowEditing]="false" dataField="PERSONEL_ADI" ></dxi-column>
       <dxi-column caption="Tarih"  [allowEditing]="false" dataField="TARIH" [width]="85"></dxi-column>
-      <dxi-column caption="Shift / İzin" [allowEditing]="false"  dataField="VARDIYA_IZIN" [width]="150"></dxi-column>
+      <!-- <dxi-column caption="Shift / İzin" [allowEditing]="false"  dataField="VARDIYA_IZIN" [width]="150"></dxi-column>
       <dxi-column caption="Başlangıç"  [allowEditing]="false" dataField="VARDIYA_A_ZAMAN" [width]="60"></dxi-column>
       <dxi-column caption="Bitiş"  [allowEditing]="false" dataField="VARDIYA_K_ZAMAN" [width]="60"></dxi-column>
       <dxi-column caption="Vardiya Süresi" [allowEditing]="false"  dataField="VARDIYA_TOPLAM" [width]="60"></dxi-column>
       <dxi-column caption="Giriş Zamanı" [allowEditing]="false" dataField="GIRIS_ZAMANI" [width]="140"></dxi-column>
-      <dxi-column caption="Çıkış Zamanı" [allowEditing]="false"  dataField="CIKIS_ZAMANI" [width]="140"></dxi-column>
-      <dxi-column caption="Toplam Mesai" [allowEditing]="false" dataField="TOPLAM_CALISMA" [width]="60"></dxi-column>
-      <dxi-column caption="+/- Mesai" [allowEditing]="false" dataField="MESAI" [width]="95"></dxi-column>
-      <dxi-column caption="Onay" [allowEditing]="true" dataField="ONAY" [width]="85"></dxi-column>
-      <dxi-column caption="Açıklama" [allowEditing]="true" dataField="ACIKLAMA"></dxi-column>
-      <dxi-column caption="Son İşlem" [allowEditing]="false" dataField="KULLANICI" [width]="120"></dxi-column>
+      <dxi-column caption="Çıkış Zamanı" [allowEditing]="false"  dataField="CIKIS_ZAMANI" [width]="140"></dxi-column> -->
+      <dxi-column caption="Top.Mesai" [allowEditing]="false" dataField="TOPLAM_CALISMA" [width]="115" alignment="center"></dxi-column>
+      <dxi-column caption="+/- Mesai" [allowEditing]="false" dataField="MESAI" [width]="115" alignment="center"></dxi-column>
+      <dxi-column caption="Onay" [allowEditing]="false" dataField="ONAY" [width]="85"></dxi-column>
+      <dxi-column caption="Açıklama" [allowEditing]="false" dataField="ACIKLAMA"></dxi-column>
+      <dxi-column caption="Onay Veren" [allowEditing]="false" dataField="KULLANICI" [width]="120"></dxi-column>
       <dxo-group-panel [visible]="true"></dxo-group-panel>
       <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
       <!-- <dxi-column caption="Mesai"  dataField="MESAI"></dxi-column>

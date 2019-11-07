@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChange, SimpleChanges, Input } from '@angular/core';
 import {workPlanTypeModel,workPlanForGroupModelsFrom} from '../model/workPlanForGroupModel';
 import {workPlanForGroupService} from '../services/groupWorkPlan/groupWorkPlan.service'
 import {shiftAndPermissionServices} from '../services/shiftAndPermissionServices/shiftAndPermissionServices.service'
@@ -17,7 +17,7 @@ import { VirtualTimeScheduler } from 'rxjs';
   templateUrl: './PDKSCreatingGroupPlan.component.html',
   styleUrls: ['./PDKSCreatingGroupPlan.component.css']
 })
-export class PDKSCreatingGroupPlanComponent implements OnInit {
+export class PDKSCreatingGroupPlanComponent implements OnInit,OnChanges {
   @Input('selectedData') selectedData: workPlanTypeModel; 
   shiftAndPermissionType : workPlanTypeModel[];
   saveCreatingGroupPlanForm : workPlanForGroupModelsFrom;
@@ -26,15 +26,18 @@ export class PDKSCreatingGroupPlanComponent implements OnInit {
   @Input()  public myCallback: Function; 
   constructor( public workPlanForGroupService : workPlanForGroupService , public shiftAndPermissionService : shiftAndPermissionServices) {  
     this.saveCreatingGroupPlanForm = workPlanForGroupService.getWorkPlanForGroupInstance()
+    //this.getShiftAndPermissionType()
     // this.shiftAndPermissionType = shiftAndPermissionService.getWorkPlan();
     // this.btnClear()
    }
    
 
+   ngOnChanges(changes : SimpleChanges){
+          this.getShiftAndPermissionType()
+   }
 
     ngOnInit() {
                   this.getShiftAndPermissionType()
-                  
             }
   btnClear() { 
     let element = document.getElementById("myForm1");

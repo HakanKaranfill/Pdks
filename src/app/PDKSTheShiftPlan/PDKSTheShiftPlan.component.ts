@@ -113,6 +113,7 @@ saveShift(){
   let element = document.getElementById("myForm");
   let instance = Form.getInstance(element) as Form; 
   let result = instance.validate()
+  console.log(result.isValid)
   if (result.isValid) 
   {
     this.shiftService.saveShift(this.shiftForm).subscribe(result => {
@@ -139,10 +140,18 @@ saveShift(){
       }
     })
   }
-
-  
-
+ }
+ onCellPrepared(e){
+  if(e.rowType === 'group') {
+      var nodeColors = [ '#BEDFE6', '#C9ECD7'];
+      e.cellElement.style.backgroundColor = nodeColors[e.row.groupIndex];
+      e.cellElement.style.color = '#000';
+      if(e.cellElement.firstChild && e.cellElement.firstChild.style) e.cellElement.firstChild.style.color = '#000';
   }
+  if(e.rowType === 'groupFooter') {
+      e.cellElement.style.fontStyle = 'italic';
+  }    
+}   
 }
 
 //  var result = confirm("Silme işlemini onaylıyor musunuz?", "Silme İşlemi");

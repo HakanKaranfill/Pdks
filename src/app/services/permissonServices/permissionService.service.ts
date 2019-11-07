@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {permissonFormModel,permissionTypeModel,controlModel} from '../../model/permissionFormModel';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {UserService} from '../loginServices/user.service'
 
 // let ctrlModel : controlModel = {
 //   control : 0 ,
@@ -9,6 +10,7 @@ let permissonModel : permissonFormModel = {
   Kimlik:'',
   permissionName: '',
   type: '',
+  SUBE_KODU:'',
   }
 
   let permissionTypes : permissionTypeModel[] = [
@@ -27,7 +29,7 @@ let permissonModel : permissonFormModel = {
 })
 export class PermissionServiceService {
 
-constructor(private http : HttpClient) { }
+constructor(private http : HttpClient, public _userService : UserService) { }
 
 
 getPermissionFormInstance()
@@ -46,7 +48,7 @@ deletePermission(permissonModel)
   let httpHeaders = new HttpHeaders().set('Content-Type', 'application/json')
   let parameters = JSON.stringify({
     permissionModel : permissonModel,
-    licanceNo:2402
+    licanceId : this._userService.userLicances[0].licanceId,
   });
   let options = { headers: httpHeaders,
   body:parameters }; 
@@ -57,7 +59,8 @@ savePermission(permissonModel){
     let httpHeaders = new HttpHeaders().set('Content-Type', 'application/json')
     let parameters = JSON.stringify({
       permissionModel : permissonModel,
-      licanceNo:2402
+      licanceId : this._userService.userLicances[0].licanceId,
+      companyCode : this._userService.userLicances[0].companyCode
     });
     let options = { headers: httpHeaders}; 
     debugger
@@ -67,10 +70,20 @@ savePermission(permissonModel){
     }
 
     getPermissions()
+    // {
+    //   return this.http.get<permissonFormModel[]>('http://localhost:5001/api/permission');
+    // }
     {
-      return this.http.get<permissonFormModel[]>('http://localhost:5001/api/permission');
-    }
-
+      let httpHeaders = new HttpHeaders().set('Content-Type','application/json')
+      let parameters = JSON.stringify({
+          licanceId : this._userService.userLicances[0].licanceId,
+          companyCode : this._userService.userLicances[0].companyCode
+      });
+      let options = {headers : httpHeaders};
+      return this.http.post<permissonFormModel[]>('http://localhost:5001/api/permission',parameters,options)
+ 
+        
+      }
 
     
     getPermissionsControl(kimlik:number)

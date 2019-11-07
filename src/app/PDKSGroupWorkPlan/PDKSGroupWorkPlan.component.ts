@@ -58,6 +58,7 @@ export class PDKSCreateGroupComponent implements OnInit {
   //İzin Listesi Çekiliyor..
   getGroup(){
 this.groupService.getGroups().subscribe(result=>{
+  this.getShiftAndPermissionType();
   this.groupList=result;
   
 })
@@ -79,6 +80,7 @@ this.groupService.getGroups().subscribe(result=>{
   public theCallback(){
     this.getWorkGroupPlan();
     this.isPopupCreatingGroupPlan = false
+    
   }
  
 
@@ -222,10 +224,18 @@ saveGroup(){
       }
     })
   }
-
-  
-
   }
+  onCellPrepared(e){
+    if(e.rowType === 'group') {
+        var nodeColors = [ '#BEDFE6', '#C9ECD7'];
+        e.cellElement.style.backgroundColor = nodeColors[e.row.groupIndex];
+        e.cellElement.style.color = '#000';
+        if(e.cellElement.firstChild && e.cellElement.firstChild.style) e.cellElement.firstChild.style.color = '#000';
+    }
+    if(e.rowType === 'groupFooter') {
+        e.cellElement.style.fontStyle = 'italic';
+    }    
+  }   
 }
 
 //  var result = confirm("Silme işlemini onaylıyor musunuz?", "Silme İşlemi");

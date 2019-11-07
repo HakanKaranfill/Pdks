@@ -3,4 +3,5 @@ export class shiftFormModel {
         shiftName;
         sDate;
         eDate;
+        SUBE_KODU;
     }

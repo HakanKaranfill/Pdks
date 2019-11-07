@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {montlyScheduleModel, montlyScheduleParam} from '../../model/montlyScheduleModel';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import {UserService} from '../loginServices/user.service'
 
 let montlyScheduleModels : montlyScheduleModel = {
     SUBE : '',
@@ -30,7 +30,7 @@ let montlyScheduleModels : montlyScheduleModel = {
 })
 export class MontlyScheduleService {
 
-constructor(private http : HttpClient) { }
+constructor(private http : HttpClient, public _userService : UserService) { }
 
 
 getMontlyParamFormInstance()
@@ -75,7 +75,8 @@ return montlyParamModel;
           let parameters = JSON.stringify({
             startDate : startDate,
             endDate : endDate,      
-            licanceNo:2402
+            licanceId : this._userService.userLicances[0].licanceId,
+            companyCode : this._userService.userLicances[0].companyCode
           });
           let options = { headers: httpHeaders}; 
           // return this.http.get<montlyScheduleModel[]>('http://localhost:5001/api/group');

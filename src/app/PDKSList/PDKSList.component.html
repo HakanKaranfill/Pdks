@@ -61,7 +61,7 @@ fullScreen= "true"
 
 
 <dx-popup 
-title="Aylık Çizelge"
+title="Kontrol / Onay"
 [(visible)]="isPopupMonthlySchedule"
 fullScreen= "true"
 [showCloseButton]="true">
@@ -70,7 +70,19 @@ fullScreen= "true"
       <app-PDKSMontlySchedule [(isPopupMonthlySchedule)]="isPopupMonthlySchedule"></app-PDKSMontlySchedule>
   </div>
   </dx-scroll-view>
-</dx-popup>  
+</dx-popup> 
+
+<dx-popup 
+title="Aylık Rapor"
+[(visible)]="isPopupMonthlyReport"
+fullScreen= "true"
+[showCloseButton]="true">
+<dx-scroll-view direction="both"> 
+  <div id="content">
+      <app-PDKSMontlyReport [(isPopupMonthlyReport)]="isPopupMonthlyReport"></app-PDKSMontlyReport>
+  </div>
+  </dx-scroll-view>
+</dx-popup> 
 
 
     
@@ -93,7 +105,8 @@ fullScreen= "true"
  <dx-button stylingMode="contained" id="button" type="default" text="Shift Tanımlaması"  (onClick)="isPopupShiftPlan = true"></dx-button>
  <dx-button stylingMode="contained" id="button" type="default" text="Grup Çalışma Planı" (onClick)="isPopupGroupWorkPlan = true"></dx-button>
  <dx-button stylingMode="contained" id="button" type="default" text="Personel Çalışma Planı" (onClick)="personelForWorkPlan($event)" color = "red"></dx-button>
- <dx-button stylingMode="contained" id="button" type="default" text="Aylık Çizelge" (onClick)="PopupMonthlySchedule($event)" ></dx-button>
+ <dx-button stylingMode="contained" id="button" type="default" text="Kontrol / Onay" (onClick)="PopupMonthlySchedule($event)" ></dx-button>
+ <dx-button stylingMode="contained" id="button" type="default" text="Aylık Rapor" (onClick)="PopupMonthlyReport($event)" ></dx-button>
  </div>
  
 
@@ -112,14 +125,16 @@ margin-top: 50px;">
     [columnHidingEnabled]="true" 
     (onRowUpdated)="UpdateStaff($event)"
     (onSelectionChanged)="selectionChanged($event)"
-    [selectedRowKeys]="[]">    
+    [selectedRowKeys]="[]"
+    (onCellPrepared)="onCellPrepared($event)">    
 
     <dxo-selection mode="single"></dxo-selection>
     <dxo-group-panel [visible]="true"></dxo-group-panel>
+    <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
     <dxo-load-panel [enabled]="true"></dxo-load-panel>
     <dxo-paging [pageSize]="10"></dxo-paging>
     <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[20, 40, 60, 80, 100]"></dxo-pager>
-    <dxo-group-panel [visible]="false"></dxo-group-panel>
+    <!-- <dxo-group-panel [visible]="false"></dxo-group-panel> -->
     <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
     <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="false"></dxo-editing>
     <dxo-filter-row [visible]="true" ></dxo-filter-row>
@@ -127,7 +142,7 @@ margin-top: 50px;">
     <dxo-search-panel [visible]="true" [width]="240" placeholder="Arama..."></dxo-search-panel>
     <dxo-export [enabled]="true" fileName="Personel Listesi" [allowExportSelectedData]="true"></dxo-export>
     <dxi-column  caption="Personel Adı" [allowEditing]= "false"   dataField="PERSONEL_ADI"></dxi-column>
-    <dxi-column caption="Şube Kodu" [allowEditing]= "false" dataField="SUBE_KODU"></dxi-column>
+    <dxi-column caption="Şube Kodu" [groupIndex]="0" [allowEditing]= "false" dataField="SUBE_KODU"></dxi-column>
     <dxi-column caption="Ünvan Adı" dataField="UNVAN_ID">
         <dxo-lookup [dataSource]="getTitleEdit"  valueExpr="kimlik" displayExpr="UNVAN_ADI"></dxo-lookup>
     </dxi-column>
@@ -138,11 +153,24 @@ margin-top: 50px;">
 
     <dxi-column caption="İşe Giriş" dataField="ISE_GIRIS" dataType="date" editorType="dxDateBox" [format]="{ type: 'dd.MM.yyyy' }" [editorOptions]="{ type: 'date', width: '100%', displayFormat : 'dd.MM.yyyy' , dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }"></dxi-column>
     <dxi-column caption="İşten Ayrılış" dataField="ISTEN_AYRILIS" dataType="date" [format]="{ type: 'dd.MM.yyyy' }" [editorOptions]="{type: 'date', width: '100%', displayFormat : 'dd.MM.yyyy' , dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ss' }"></dxi-column>
-    <dxi-column caption="Durum" dataField="AKTIF"></dxi-column>
+    <!-- <dxi-column caption="Durum" dataField="AKTIF"></dxi-column> -->
+    <!-- <dxi-column caption="Telefon" dataField="TELEFON"></dxi-column> -->
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
+      <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
     <dxi-column type="buttons" >
         <dxi-button name="edit" icon="edit"></dxi-button>
     </dxi-column>
 </dx-data-grid>
 </div>
+<div class="options">
+    <!-- <div class="caption">Seçenekler</div> -->
+    <div class="option">
+        <dx-check-box
+            [(value)]="expand.autoExpandAll"
+            text="Tüm Grupları Genişlet">
+        </dx-check-box>
+    </div>
+</div>
+
 
 <router-outlet></router-outlet>

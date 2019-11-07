@@ -4,6 +4,7 @@ import {TitleServicesService} from '../services/titleServices/titleService.servi
 import Form from "devextreme/ui/form";
 import notify from 'devextreme/ui/notify';
 
+
 @Component({
   selector: 'app-PDKSTitle',
   templateUrl: './PDKSTitle.component.html',
@@ -18,9 +19,11 @@ export class PDKSTitleComponent implements OnInit {
     this.titleFormData = titleService.getTitleFormInstance()
   }
 
+  
   ngOnInit() {
     this.titleHeader = "Ünvan Listesi"
     this.getList()
+    
   }
 
   btnClear() { 
@@ -33,6 +36,18 @@ export class PDKSTitleComponent implements OnInit {
         this.titleList = result;
         })
     }
+
+    onCellPrepared(e){
+      if(e.rowType === 'group') {
+          var nodeColors = [ '#BEDFE6', '#C9ECD7'];
+          e.cellElement.style.backgroundColor = nodeColors[e.row.groupIndex];
+          e.cellElement.style.color = '#000';
+          if(e.cellElement.firstChild && e.cellElement.firstChild.style) e.cellElement.firstChild.style.color = '#000';
+      }
+      if(e.rowType === 'groupFooter') {
+          e.cellElement.style.fontStyle = 'italic';
+      }    
+  }    
 
   saveTitle(){   
     debugger

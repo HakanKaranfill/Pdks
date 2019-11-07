@@ -22,6 +22,7 @@ export class  workPlanForGroupModelsFrom {
 export class workPlanTypeModel {
     kimlik;
     ADI;
+    SUBE_KODU;
 }
 
 // export class workPlanTypeModelNew {
